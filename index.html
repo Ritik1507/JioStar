@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -21,15 +21,14 @@
                 <!-- Custom Multiselect for Severity -->
                 <div class="filter-group">
                     <div class="custom-multiselect" id="severityMultiselect">
-                        <div class="multiselect-trigger">
+                        <div class="multiselect-trigger" tabindex="0" role="button" aria-haspopup="listbox">
                             <span class="multiselect-text">Severity</span>
                             <span class="multiselect-arrow">▼</span>
                         </div>
-                        <div class="multiselect-dropdown">
+                        <div class="multiselect-dropdown" role="listbox" aria-multiselectable="true">
                             <label><input type="checkbox" value="critical"> Critical</label>
                             <label><input type="checkbox" value="high"> High</label>
-                            <label><input type="checkbox" value="important"> important</label>
-                            <!-- <label><input type="checkbox" value="low"> Low</label> -->
+                            <label><input type="checkbox" value="important"> Important</label>
                         </div>
                     </div>
                 </div>
@@ -37,11 +36,11 @@
                 <!-- Custom Multiselect for Group -->
                 <div class="filter-group">
                     <div class="custom-multiselect" id="groupMultiselect">
-                        <div class="multiselect-trigger">
+                        <div class="multiselect-trigger" tabindex="0" role="button" aria-haspopup="listbox">
                             <span class="multiselect-text">Group</span>
                             <span class="multiselect-arrow">▼</span>
                         </div>
-                        <div class="multiselect-dropdown">
+                        <div class="multiselect-dropdown" role="listbox" aria-multiselectable="true">
                             <label><input type="checkbox" value="servers"> Servers</label>
                             <label><input type="checkbox" value="workstations"> Workstations</label>
                             <label><input type="checkbox" value="laptops"> Laptops</label>
@@ -58,7 +57,7 @@
                 <div class="filter-group">
                     <button class="btn btn-primary" id="applyBtn">Apply</button>
                 </div>
-                <div class="filter-group">
+                <div class="filter-group wide">
                     <button class="btn btn-secondary" id="resetBtn">Reset</button>
                 </div>
             </div>
@@ -69,33 +68,55 @@
             <div class="table-header">
                 <h2>Patch Management</h2>
             </div>
+
             <div class="table-controls-row">
                 <div class="table-controls">
-                    <select id="status">
-                        <option value="">Status</option>
-                        <option value="pending">Pending</option>
-                        <option value="remediated">Remediated</option>
-                        <!-- <option value="failed">Failed</option> -->
-                    </select>
-                    <select id="severity2">
-                        <option value="">Severity</option>
-                        <option value="critical">Critical</option>
-                        <option value="high">High</option>
-                        <option value="important">Important</option>
-                        <!-- <option value="low">Low</option> -->
-                    </select>
-                    <select id="export">
-                        <option value="">Export</option>
-                        <option value="csv">Export as CSV</option>
-                        <!-- <option value="excel">Export as Excel</option>
-                        <option value="pdf">Export as PDF</option> -->
-                    </select>
+                    <!-- Custom single-selects (replacing native select) -->
+                    <div class="custom-select" data-id="status" data-value="">
+                        <div class="select-trigger" tabindex="0" role="button" aria-haspopup="listbox" aria-expanded="false">
+                            <span class="select-text">Status</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="select-dropdown" role="listbox">
+                            <div data-value="">Status</div>
+                            <div data-value="pending">Pending</div>
+                            <div data-value="remediated">Remediated</div>
+                        </div>
+                    </div>
+
+                    <div class="custom-select" data-id="severity2" data-value="">
+                        <div class="select-trigger" tabindex="0" role="button" aria-haspopup="listbox" aria-expanded="false">
+                            <span class="select-text">Severity</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="select-dropdown" role="listbox">
+                            <div data-value="">Severity</div>
+                            <div data-value="critical">Critical</div>
+                            <div data-value="high">High</div>
+                            <div data-value="important">Important</div>
+                        </div>
+                    </div>
+
+                    <div class="custom-select" data-id="export" data-value="">
+                        <div class="select-trigger" tabindex="0" role="button" aria-haspopup="listbox" aria-expanded="false">
+                            <span class="select-text">Export</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="select-dropdown" role="listbox">
+                            <div data-value="">Export</div>
+                            <div data-value="csv">Export as CSV</div>
+                            <div data-value="excel">Export as Excel</div>
+                            <div data-value="pdf">Export as PDF</div>
+                        </div>
+                    </div>
+
                     <div class="search-wrapper">
                         <input type="text" id="search" placeholder="Search patches...">
                         <span class="search-icon">🔍</span>
                     </div>
                 </div>
             </div>
+
             <table id="dataTable">
                 <thead>
                     <tr>
