@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">D</div>
+        <h1>Dashboard</h1>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Filters Section -->
+        <div class="filters">
+            <div class="filter-row">
+                <!-- Custom Multiselect for Severity -->
+                <div class="filter-group">
+                    <div class="custom-multiselect" id="severityMultiselect">
+                        <div class="multiselect-trigger">
+                            <span class="multiselect-text">Severity</span>
+                            <span class="multiselect-arrow">▼</span>
+                        </div>
+                        <div class="multiselect-dropdown">
+                            <label><input type="checkbox" value="critical"> Critical</label>
+                            <label><input type="checkbox" value="high"> High</label>
+                            <label><input type="checkbox" value="important"> important</label>
+                            <!-- <label><input type="checkbox" value="low"> Low</label> -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom Multiselect for Group -->
+                <div class="filter-group">
+                    <div class="custom-multiselect" id="groupMultiselect">
+                        <div class="multiselect-trigger">
+                            <span class="multiselect-text">Group</span>
+                            <span class="multiselect-arrow">▼</span>
+                        </div>
+                        <div class="multiselect-dropdown">
+                            <label><input type="checkbox" value="servers"> Servers</label>
+                            <label><input type="checkbox" value="workstations"> Workstations</label>
+                            <label><input type="checkbox" value="laptops"> Laptops</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <input type="date" id="dateFrom" placeholder="Date range From">
+                </div>
+                <div class="filter-group">
+                    <input type="date" id="dateTo" placeholder="Date Range To">
+                </div>
+                <div class="filter-group">
+                    <button class="btn btn-primary" id="applyBtn">Apply</button>
+                </div>
+                <div class="filter-group">
+                    <button class="btn btn-secondary" id="resetBtn">Reset</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Section -->
+        <div class="table-container">
+            <div class="table-header">
+                <h2>Patch Management</h2>
+            </div>
+            <div class="table-controls-row">
+                <div class="table-controls">
+                    <select id="status">
+                        <option value="">Status</option>
+                        <option value="pending">Pending</option>
+                        <option value="remediated">Remediated</option>
+                        <!-- <option value="failed">Failed</option> -->
+                    </select>
+                    <select id="severity2">
+                        <option value="">Severity</option>
+                        <option value="critical">Critical</option>
+                        <option value="high">High</option>
+                        <option value="important">Important</option>
+                        <!-- <option value="low">Low</option> -->
+                    </select>
+                    <select id="export">
+                        <option value="">Export</option>
+                        <option value="csv">Export as CSV</option>
+                        <!-- <option value="excel">Export as Excel</option>
+                        <option value="pdf">Export as PDF</option> -->
+                    </select>
+                    <div class="search-wrapper">
+                        <input type="text" id="search" placeholder="Search patches...">
+                        <span class="search-icon">🔍</span>
+                    </div>
+                </div>
+            </div>
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Patch Name</th>
+                        <th>Severity</th>
+                        <th>Computer name</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr>
+                        <td colspan="6" class="empty-state">
+                            <div class="empty-state-icon">📊</div>
+                            <div>No data available. Apply filters to load data.</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
