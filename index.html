@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
     <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
@@ -48,12 +50,21 @@
                     </div>
                 </div>
 
+                <!-- Date From (modern input style) -->
                 <div class="filter-group">
-                    <input type="date" id="dateFrom" placeholder="Date range From">
+                    <div class="custom-input">
+                        <input type="date" id="dateFrom">
+                        <label for="dateFrom">From</label>
+                    </div>
                 </div>
+
                 <div class="filter-group">
-                    <input type="date" id="dateTo" placeholder="Date Range To">
+                    <div class="custom-input">
+                        <input type="date" id="dateTo">
+                        <label for="dateTo">To</label>
+                    </div>
                 </div>
+
                 <div class="filter-group">
                     <button class="btn btn-primary" id="applyBtn">Apply</button>
                 </div>
@@ -73,7 +84,8 @@
                 <div class="table-controls">
                     <!-- Custom single-selects (replacing native select) -->
                     <div class="custom-select" data-id="status" data-value="">
-                        <div class="select-trigger" tabindex="0" role="button" aria-haspopup="listbox" aria-expanded="false">
+                        <div class="select-trigger" tabindex="0" role="button" aria-haspopup="listbox"
+                            aria-expanded="false">
                             <span class="select-text">Status</span>
                             <span class="arrow">▼</span>
                         </div>
@@ -85,7 +97,8 @@
                     </div>
 
                     <div class="custom-select" data-id="severity2" data-value="">
-                        <div class="select-trigger" tabindex="0" role="button" aria-haspopup="listbox" aria-expanded="false">
+                        <div class="select-trigger" tabindex="0" role="button" aria-haspopup="listbox"
+                            aria-expanded="false">
                             <span class="select-text">Severity</span>
                             <span class="arrow">▼</span>
                         </div>
@@ -98,15 +111,16 @@
                     </div>
 
                     <div class="custom-select" data-id="export" data-value="">
-                        <div class="select-trigger" tabindex="0" role="button" aria-haspopup="listbox" aria-expanded="false">
+                        <div class="select-trigger" tabindex="0" role="button" aria-haspopup="listbox"
+                            aria-expanded="false">
                             <span class="select-text">Export</span>
                             <span class="arrow">▼</span>
                         </div>
                         <div class="select-dropdown" role="listbox">
                             <div data-value="">Export</div>
                             <div data-value="csv">Export as CSV</div>
-                            <div data-value="excel">Export as Excel</div>
-                            <div data-value="pdf">Export as PDF</div>
+                            <!-- <div data-value="excel">Export as Excel</div>
+                            <div data-value="pdf">Export as PDF</div> -->
                         </div>
                     </div>
 
@@ -138,8 +152,10 @@
                 </tbody>
             </table>
         </div>
+        <div class="pagination-container" id="paginationContainer"></div>
     </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>
