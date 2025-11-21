@@ -1,4 +1,4 @@
-// Sample data
+// Sample data (REMAINS UNCHANGED)
 const sampleData = [
     { patchName: "Windows Secure Boot Patch", severity: "Critical", computerName: "SRV-101", group: "servers", from: "2024-04-10", to: "2024-04-11", status: "Remediated" },
     { patchName: "Chrome Security Patch 124", severity: "High", computerName: "WKS-102", group: "workstations", from: "2024-04-12", to: "2024-04-13", status: "Outstanding" },
@@ -226,7 +226,6 @@ function getSelectedValues(multiselectId) {
 /* -----------------------------
     PAGINATION & DISPLAY FUNCTIONS
    ----------------------------- */
-// ... (displayTableData, renderPagination, getStatusClass, getSeverityClass functions remain the same) ...
 
 /**
  * Renders the table body with the data for the current page.
@@ -413,6 +412,105 @@ function updateKpiCards(data) {
     document.getElementById('compliancePercentageValue').textContent = 
         `${compliancePercentage.toFixed(1)}%`;
 }
+/* -----------------------------
+    CUSTOM CALENDAR LOGIC
+   ----------------------------- */
+
+let currentCalendarDate = new Date();
+let activeInput = null;
+const datePickerPopup = document.getElementById('datePickerPopup');
+
+// New Helper: Pads day/month to 2 digits and returns YYYY-MM-DD
+function formatToISO(dateString) {
+    const parts = dateString.split('-');
+    if (parts.length === 3) {
+        // Assuming input format is DD-MM-YYYY
+        const day = parts[0].padStart(2, '0');
+        const month = parts[1].padStart(2, '0');
+        const year = parts[2];
+        return `${year}-${month}-${day}`;
+    }
+    // Return the original string if format is unknown or empty
+    return dateString;
+}
+
+// Helper for preparing date strings for the calendar display (DD-MM-YYYY)
+function formatToDisplay(date) {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+}
+
+function renderCalendar(date) {
+    const year = date.getFullYear();
+    const month = date.getMonth(); 
+    
+    // Get month name
+    const monthName = date.toLocaleString('en-us', { month: 'long' });
+
+    // Calculate days
+    const firstDayOfMonth = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    let html = '<div class="custom-calendar">';
+    
+    // Header
+    html += `<div class="cal-header">
+                <button class="cal-nav-btn" onclick="navigateMonth(-1)">&#9664;</button>
+                <span class="cal-title">${monthName} ${year}</span>
+                <button class="cal-nav-btn" onclick="navigateMonth(1)">&#9654;</button>
+            </div>`;
+    
+    // Days of the week header
+    html += '<div class="cal-days">';
+    const dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    dayLabels.forEach(label => {
+        html += `<span class="day-label">${label}</span>`;
+    });
+
+    // Blanks for start of month
+    for (let i = 0; i < firstDayOfMonth; i++) {
+        html += '<span></span>';
+    }
+
+    // Days of the month
+    for (let day = 1; day <= daysInMonth; day++) {
+        const currentDayDate = new Date(year, month, day);
+        // Date format to write to input (DD-MM-YYYY)
+        const displayDate = formatToDisplay(currentDayDate); 
+        
+        // Highlight logic (basic: checks if date matches active input value)
+        const isSelected = activeInput && activeInput.value === displayDate;
+        const selectedClass = isSelected ? 'selected' : '';
+
+        html += `<span data-date="${displayDate}" class="${selectedClass}" onclick="selectDate('${displayDate}')">${day}</span>`;
+    }
+    
+    html += '</div></div>';
+    datePickerPopup.innerHTML = html;
+}
+
+function navigateMonth(offset) {
+    currentCalendarDate.setMonth(currentCalendarDate.getMonth() + offset);
+    renderCalendar(currentCalendarDate);
+}
+
+function selectDate(dateString) {
+    if (activeInput) {
+        // dateString is in DD-MM-YYYY format for display
+        activeInput.value = dateString; 
+        
+        // Trigger change event to fire the filtering logic
+        activeInput.dispatchEvent(new Event('change')); 
+        
+        datePickerPopup.style.display = 'none';
+        activeInput = null;
+    }
+}
+// Ensure calendar navigation functions are globally available
+window.navigateMonth = navigateMonth;
+window.selectDate = selectDate;
 
 
 /* -----------------------------
@@ -429,23 +527,29 @@ function applyFilters(page = 1) {
     const search = document.getElementById('search').value.toLowerCase();
     const status = getCustomSelectValue('status');
     const severity2 = getCustomSelectValue('severity2');
-    const group = getCustomSelectValue('group'); // Group is now a single select
+    const group = getCustomSelectValue('group'); 
     
-    const dateFrom = document.getElementById('dateFrom').value;
-    const dateTo = document.getElementById('dateTo').value;
+    // FIX 1: Convert date input values to YYYY-MM-DD for reliable filtering
+    const dateFrom = formatToISO(document.getElementById('dateFrom').value);
+    const dateTo = formatToISO(document.getElementById('dateTo').value);
+    
     const selectedSeverities = getSelectedValues('severityMultiselect');
 
     // 2. Filter the entire dataset
     filteredData = sampleData.filter(item => {
         // Search filter (Patch Name or Computer Name)
         const itemText = (item.patchName + ' ' + item.computerName).toLowerCase();
+        // FIX 3: Allow filter if search is empty. If search has text, check if itemText includes it.
         if (search && !itemText.includes(search)) {
             return false;
         }
+        
         // Table Status filter (Custom Select)
-        if (status && item.status.toLowerCase() !== status) {
+        // FIX 2: Check if status is explicitly filtered, AND if the selected value is NOT 'all'.
+        if (status && status !== 'all' && item.status.toLowerCase() !== status) {
             return false;
         }
+        
         // Table Severity filter (Custom Select)
         if (severity2 && item.severity.toLowerCase() !== severity2) {
             return false;
@@ -461,11 +565,11 @@ function applyFilters(page = 1) {
             return false;
         }
         
-        // Date From filter
+        // Date From filter - Now correctly uses YYYY-MM-DD comparison
         if (dateFrom && item.from < dateFrom) {
             return false;
         }
-        // Date To filter
+        // Date To filter - Now correctly uses YYYY-MM-DD comparison
         if (dateTo && item.to > dateTo) {
             return false;
         }
@@ -489,7 +593,6 @@ function resetFilters() {
         const checkboxes = multiselect.querySelectorAll('input[type="checkbox"]');
         checkboxes.forEach(cb => cb.checked = false);
         const textElement = multiselect.querySelector('.multiselect-text');
-        // Only checks for severity multiselect
         if (multiselect.id === 'severityMultiselect') {
             textElement.textContent = 'Severity';
         }
@@ -497,35 +600,34 @@ function resetFilters() {
         multiselect.querySelector('.multiselect-trigger').classList.remove('active');
     });
 
-    // reset custom selects (Status, Severity2, Export, and Group)
+    // ... (Custom Select reset logic remains the same) ...
     document.querySelectorAll('.custom-select').forEach(s => {
         s.dataset.value = '';
-        
-        // Logic to set the default text based on data-id
         let defaultText = s.dataset.id === 'status' ? 'Status' : 
                           s.dataset.id === 'severity2' ? 'Severity' : 
                           s.dataset.id === 'group' ? 'Group' : 'Export';
-        
         s.querySelector('.select-text').textContent = defaultText;
-
-        // Close dropdowns
         s.querySelector('.select-dropdown').classList.remove('show');
         s.querySelector('.select-trigger').classList.remove('active');
         s.querySelector('.select-trigger').setAttribute('aria-expanded', 'false');
     });
 
     document.getElementById('search').value = '';
-    document.getElementById('dateFrom').value = '';
+    // Clear date inputs
+    document.getElementById('dateFrom').value = ''; 
     document.getElementById('dateTo').value = '';
 
     // Remove filled class for date inputs
     document.querySelectorAll('.custom-input').forEach(ci => ci.classList.remove('filled'));
 
+    // Hide calendar popup if open
+    datePickerPopup.style.display = 'none';
+
     // Reset state for pagination/data
     filteredData = [];
     currentPage = 1;
 
-    // Clear table and pagination UI (Table will show "No data available")
+    // Clear table and pagination UI
     document.getElementById('paginationContainer').innerHTML = '';
     const tableBody = document.getElementById('tableBody');
     tableBody.innerHTML = `
@@ -537,7 +639,6 @@ function resetFilters() {
         </tr>
     `;
     
-    // CRITICAL FIX: The KPI must be updated with empty data on RESET
     updateKpiCards(filteredData); 
 }
 
@@ -612,18 +713,42 @@ document.getElementById('exportCsvBtn').addEventListener('click', exportToCSV);
 
 // Dynamic search trigger (re-filter and reset to page 1)
 document.getElementById('search').addEventListener('keyup', function() {
-    // Only filter if there is data loaded or if the user types more than 2 chars to search
-    if (filteredData.length > 0 || this.value.length > 2) applyFilters(1);
+    // CRITICAL FIX: Always trigger filtering if search value exists, or if filtering has already occurred.
+    // Length >= 0 covers all key presses and ensures search results update instantly.
+    if (this.value.length >= 0) { 
+        applyFilters(1);
+    }
 });
 
-// Date inputs change -> apply (re-filter and reset to page 1)
-document.getElementById('dateFrom').addEventListener('change', () => {
-    toggleFilledClass('dateFrom');
-    applyFilters(1);
-});
-document.getElementById('dateTo').addEventListener('change', () => {
-    toggleFilledClass('dateTo');
-    applyFilters(1);
+// New custom date input wiring
+document.querySelectorAll('.date-input').forEach(input => {
+    input.addEventListener('click', function(e) {
+        e.stopPropagation();
+        
+        // Hide other open dropdowns first
+        document.querySelectorAll('.custom-select .select-dropdown.show').forEach(d => d.classList.remove('show'));
+        
+        // Determine position based on the input clicked
+        const rect = input.getBoundingClientRect();
+        
+        // Position the calendar below the input
+        datePickerPopup.style.top = `${rect.top + rect.height + 10}px`;
+        datePickerPopup.style.left = `${rect.left}px`;
+        datePickerPopup.style.display = 'block';
+
+        activeInput = input;
+        
+        // Render the calendar starting from today or the selected date
+        let initialDate = input.value ? new Date(input.value.split('-').reverse().join('-')) : new Date();
+        currentCalendarDate = initialDate;
+        renderCalendar(currentCalendarDate);
+    });
+
+    // Keep the change listener for filtering when a date is selected
+    input.addEventListener('change', () => {
+        toggleFilledClass(input.id);
+        if (input.value) applyFilters(1); 
+    });
 });
 
 // helper to mark inputs as filled so label floats

@@ -47,19 +47,23 @@
                     </div>
                 </div>
 
-                <div class="filter-group filter-lg">
-                    <div class="custom-input">
-                        <input type="date" id="dateFrom">
-                        <label for="dateFrom">From</label>
+               <div class="filter-group filter-lg">
+                   <div class="custom-input custom-date-wrapper">
+                      <input type="text" id="dateFrom" class="date-input" placeholder="dd-mm-yyyy" readonly>
+                      <label for="dateFrom">From</label>
+                      <i class="fa-solid fa-calendar-days calendar-icon"></i>
                     </div>
                 </div>
 
-                <div class="filter-group filter-lg">
-                    <div class="custom-input">
-                        <input type="date" id="dateTo">
-                        <label for="dateTo">To</label>
-                    </div>
-                </div>
+<div class="filter-group filter-lg">
+    <div class="custom-input custom-date-wrapper">
+        <input type="text" id="dateTo" class="date-input" placeholder="dd-mm-yyyy" readonly>
+        <label for="dateTo">To</label>
+        <i class="fa-solid fa-calendar-days calendar-icon"></i>
+    </div>
+</div>
+
+<div id="datePickerPopup"></div>
 
                 <div class="filter-group">
                     <button class="btn btn-primary" id="applyBtn">Apply</button>
@@ -107,7 +111,7 @@
                         </div>
                         <div class="select-dropdown" role="listbox">
                             <div data-value="">All</div>
-                            <div data-value="pending">Outstanding</div>
+                            <div data-value="outstanding">Outstanding</div>
                             <div data-value="remediated">Remediated</div>
                         </div>
                     </div>
