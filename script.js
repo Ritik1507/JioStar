@@ -1,55 +1,55 @@
 // Sample data
 const sampleData = [
     { patchName: "Windows Secure Boot Patch", severity: "Critical", computerName: "SRV-101", group: "servers", from: "2024-04-10", to: "2024-04-11", status: "Remediated" },
-    { patchName: "Chrome Security Patch 124", severity: "High", computerName: "WKS-102", group: "workstations", from: "2024-04-12", to: "2024-04-13", status: "Pending" },
+    { patchName: "Chrome Security Patch 124", severity: "High", computerName: "WKS-102", group: "workstations", from: "2024-04-12", to: "2024-04-13", status: "Outstanding" },
     { patchName: "Java Runtime Update 8u421", severity: "Important", computerName: "LAP-103", group: "laptops", from: "2024-04-14", to: "2024-04-15", status: "Remediated" },
-    { patchName: "Windows Update KB5100021", severity: "Critical", computerName: "WKS-104", group: "workstations", from: "2024-04-16", to: "2024-04-17", status: "Pending" },
+    { patchName: "Windows Update KB5100021", severity: "Critical", computerName: "WKS-104", group: "workstations", from: "2024-04-16", to: "2024-04-17", status: "Outstanding" },
     { patchName: "SQL Server Engine Patch", severity: "High", computerName: "SRV-105", group: "servers", from: "2024-04-18", to: "2024-04-19", status: "Remediated" },
-    { patchName: "Firefox Patch 123.2", severity: "Important", computerName: "LAP-106", group: "laptops", from: "2024-05-01", to: "2024-05-02", status: "Pending" },
+    { patchName: "Firefox Patch 123.2", severity: "Important", computerName: "LAP-106", group: "laptops", from: "2024-05-01", to: "2024-05-02", status: "Outstanding" },
     { patchName: "Windows Defender Critical Fix", severity: "Critical", computerName: "WKS-107", group: "workstations", from: "2024-05-03", to: "2024-05-04", status: "Remediated" },
-    { patchName: "OpenSSL High Vulnerability Patch", severity: "High", computerName: "SRV-108", group: "servers", from: "2024-05-05", to: "2024-05-06", status: "Pending" },
+    { patchName: "OpenSSL High Vulnerability Patch", severity: "High", computerName: "SRV-108", group: "servers", from: "2024-05-05", to: "2024-05-06", status: "Outstanding" },
     { patchName: "Office Macro Hardening Patch", severity: "Important", computerName: "WKS-109", group: "workstations", from: "2024-05-07", to: "2024-05-08", status: "Remediated" },
-    { patchName: "Adobe PDF Engine Update", severity: "Critical", computerName: "LAP-110", group: "laptops", from: "2024-05-09", to: "2024-05-10", status: "Pending" },
+    { patchName: "Adobe PDF Engine Update", severity: "Critical", computerName: "LAP-110", group: "laptops", from: "2024-05-09", to: "2024-05-10", status: "Outstanding" },
     { patchName: "Windows Kernel Fix", severity: "High", computerName: "SRV-111", group: "servers", from: "2024-06-14", to: "2024-06-15", status: "Remediated" },
-    { patchName: "Chrome Update 125", severity: "Important", computerName: "WKS-112", group: "workstations", from: "2024-06-16", to: "2024-06-17", status: "Pending" },
-    { patchName: "Linux Root Certificate Patch", severity: "Critical", computerName: "SRV-113", group: "servers", from: "2024-06-18", to: "2024-06-19", status: "Pending" },
+    { patchName: "Chrome Update 125", severity: "Important", computerName: "WKS-112", group: "workstations", from: "2024-06-16", to: "2024-06-17", status: "Outstanding" },
+    { patchName: "Linux Root Certificate Patch", severity: "Critical", computerName: "SRV-113", group: "servers", from: "2024-06-18", to: "2024-06-19", status: "Outstanding" },
     { patchName: "HP Device Security Patch", severity: "High", computerName: "LAP-114", group: "laptops", from: "2024-06-20", to: "2024-06-21", status: "Remediated" },
-    { patchName: "Windows UI Framework Patch", severity: "Important", computerName: "WKS-115", group: "workstations", from: "2024-06-22", to: "2024-06-23", status: "Pending" },
-    { patchName: "Exchange Transport Patch", severity: "Critical", computerName: "SRV-116", group: "servers", from: "2024-07-01", to: "2024-07-02", status: "Pending" },
+    { patchName: "Windows UI Framework Patch", severity: "Important", computerName: "WKS-115", group: "workstations", from: "2024-06-22", to: "2024-06-23", status: "Outstanding" },
+    { patchName: "Exchange Transport Patch", severity: "Critical", computerName: "SRV-116", group: "servers", from: "2024-07-01", to: "2024-07-02", status: "Outstanding" },
     { patchName: "Outlook Credential Patch", severity: "High", computerName: "LAP-117", group: "laptops", from: "2024-07-03", to: "2024-07-04", status: "Remediated" },
-    { patchName: "Chrome Sandbox Fix", severity: "Important", computerName: "WKS-118", group: "workstations", from: "2024-07-05", to: "2024-07-06", status: "Pending" },
+    { patchName: "Chrome Sandbox Fix", severity: "Important", computerName: "WKS-118", group: "workstations", from: "2024-07-05", to: "2024-07-06", status: "Outstanding" },
     { patchName: "SQL Reporting Service Patch", severity: "High", computerName: "SRV-119", group: "servers", from: "2024-07-07", to: "2024-07-08", status: "Remediated" },
     { patchName: "Windows RDP Hardening Patch", severity: "Critical", computerName: "WKS-120", group: "workstations", from: "2024-07-09", to: "2024-07-10", status: "Remediated" },
-    { patchName: "Linux Privilege Escalation Patch", severity: "High", computerName: "SRV-121", group: "servers", from: "2024-08-11", to: "2024-08-12", status: "Pending" },
+    { patchName: "Linux Privilege Escalation Patch", severity: "High", computerName: "SRV-121", group: "servers", from: "2024-08-11", to: "2024-08-12", status: "Outstanding" },
     { patchName: "Office Add-in Security Patch", severity: "Important", computerName: "LAP-122", group: "laptops", from: "2024-08-13", to: "2024-08-14", status: "Remediated" },
-    { patchName: "Windows Networking Patch", severity: "Critical", computerName: "WKS-123", group: "workstations", from: "2024-08-15", to: "2024-08-16", status: "Pending" },
+    { patchName: "Windows Networking Patch", severity: "Critical", computerName: "WKS-123", group: "workstations", from: "2024-08-15", to: "2024-08-16", status: "Outstanding" },
     { patchName: "VMware Host Agent Patch", severity: "High", computerName: "SRV-124", group: "servers", from: "2024-08-17", to: "2024-08-18", status: "Remediated" },
-    { patchName: "Firefox Extended Support Patch", severity: "Important", computerName: "WKS-125", group: "workstations", from: "2024-08-19", to: "2024-08-20", status: "Pending" },
-    { patchName: "Windows Credential Guard Patch", severity: "Critical", computerName: "WKS-126", group: "workstations", from: "2024-09-22", to: "2024-09-23", status: "Pending" },
+    { patchName: "Firefox Extended Support Patch", severity: "Important", computerName: "WKS-125", group: "workstations", from: "2024-08-19", to: "2024-08-20", status: "Outstanding" },
+    { patchName: "Windows Credential Guard Patch", severity: "Critical", computerName: "WKS-126", group: "workstations", from: "2024-09-22", to: "2024-09-23", status: "Outstanding" },
     { patchName: "Chrome Password Manager Fix", severity: "High", computerName: "LAP-127", group: "laptops", from: "2024-09-24", to: "2024-09-25", status: "Remediated" },
-    { patchName: "Linux SSH Module Patch", severity: "Important", computerName: "SRV-128", group: "servers", from: "2024-09-26", to: "2024-09-27", status: "Pending" },
+    { patchName: "Linux SSH Module Patch", severity: "Important", computerName: "SRV-128", group: "servers", from: "2024-09-26", to: "2024-09-27", status: "Outstanding" },
     { patchName: "Windows RPC Patch", severity: "High", computerName: "WKS-129", group: "workstations", from: "2024-09-28", to: "2024-09-29", status: "Remediated" },
     { patchName: "SQL Database Security Patch", severity: "Critical", computerName: "SRV-130", group: "servers", from: "2024-09-30", to: "2024-10-01", status: "Remediated" },
-    { patchName: "Outlook Rendering Patch", severity: "Important", computerName: "WKS-131", group: "workstations", from: "2024-10-04", to: "2024-10-05", status: "Pending" },
+    { patchName: "Outlook Rendering Patch", severity: "Important", computerName: "WKS-131", group: "workstations", from: "2024-10-04", to: "2024-10-05", status: "Outstanding" },
     { patchName: "Chrome Rendering Patch", severity: "High", computerName: "LAP-132", group: "laptops", from: "2024-10-06", to: "2024-10-07", status: "Remediated" },
-    { patchName: "Linux Kernel 6.8 Patch", severity: "Critical", computerName: "SRV-133", group: "servers", from: "2024-10-08", to: "2024-10-09", status: "Pending" },
+    { patchName: "Linux Kernel 6.8 Patch", severity: "Critical", computerName: "SRV-133", group: "servers", from: "2024-10-08", to: "2024-10-09", status: "Outstanding" },
     { patchName: "Windows BitLocker Update", severity: "High", computerName: "WKS-134", group: "workstations", from: "2024-10-10", to: "2024-10-11", status: "Remediated" },
     { patchName: "Apache Log4J Prevention Patch", severity: "Important", computerName: "SRV-135", group: "servers", from: "2024-10-12", to: "2024-10-13", status: "Remediated" },
-    { patchName: "Microsoft Defender Core Patch", severity: "Critical", computerName: "WKS-136", group: "workstations", from: "2025-01-08", to: "2025-01-09", status: "Pending" },
+    { patchName: "Microsoft Defender Core Patch", severity: "Critical", computerName: "WKS-136", group: "workstations", from: "2025-01-08", to: "2025-01-09", status: "Outstanding" },
     { patchName: "Chrome Engine Patch", severity: "High", computerName: "LAP-137", group: "laptops", from: "2025-01-10", to: "2025-01-11", status: "Remediated" },
-    { patchName: "Linux System Daemon Patch", severity: "Important", computerName: "SRV-138", group: "servers", from: "2025-01-12", to: "2025-01-13", status: "Pending" },
+    { patchName: "Linux System Daemon Patch", severity: "Important", computerName: "SRV-138", group: "servers", from: "2025-01-12", to: "2025-01-13", status: "Outstanding" },
     { patchName: "Windows Task Scheduler Patch", severity: "High", computerName: "WKS-139", group: "workstations", from: "2025-01-14", to: "2025-01-15", status: "Remediated" },
     { patchName: "SQL Server Memory Patch", severity: "Critical", computerName: "SRV-140", group: "servers", from: "2025-01-16", to: "2025-01-17", status: "Remediated" },
-    { patchName: "Outlook Ribbon Patch", severity: "Important", computerName: "LAP-141", group: "laptops", from: "2025-02-04", to: "2025-02-05", status: "Pending" },
+    { patchName: "Outlook Ribbon Patch", severity: "Important", computerName: "LAP-141", group: "laptops", from: "2025-02-04", to: "2025-02-05", status: "Outstanding" },
     { patchName: "Firefox SSL Patch", severity: "High", computerName: "WKS-142", group: "workstations", from: "2025-02-06", to: "2025-02-07", status: "Remediated" },
-    { patchName: "Linux SSH Hardening Patch", severity: "Critical", computerName: "SRV-143", group: "servers", from: "2025-02-08", to: "2025-02-09", status: "Pending" },
-    { patchName: "Windows Bluetooth Security Patch", severity: "High", computerName: "WKS-144", group: "workstations", from: "2025-02-10", to: "2025-02-11", status: "Pending" },
+    { patchName: "Linux SSH Hardening Patch", severity: "Critical", computerName: "SRV-143", group: "servers", from: "2025-02-08", to: "2025-02-09", status: "Outstanding" },
+    { patchName: "Windows Bluetooth Security Patch", severity: "High", computerName: "WKS-144", group: "workstations", from: "2025-02-10", to: "2025-02-11", status: "Outstanding" },
     { patchName: "Exchange Mailbox Safety Patch", severity: "Critical", computerName: "SRV-145", group: "servers", from: "2025-02-12", to: "2025-02-13", status: "Remediated" },
-    { patchName: "Chrome Web Engine Patch", severity: "High", computerName: "LAP-146", group: "laptops", from: "2025-03-14", to: "2025-03-15", status: "Pending" },
+    { patchName: "Chrome Web Engine Patch", severity: "High", computerName: "LAP-146", group: "laptops", from: "2025-03-14", to: "2025-03-16", status: "Outstanding" },
     { patchName: "Windows Memory Leak Patch", severity: "Critical", computerName: "WKS-147", group: "workstations", from: "2025-03-16", to: "2025-03-17", status: "Remediated" },
-    { patchName: "Linux Container Security Patch", severity: "High", computerName: "SRV-148", group: "servers", from: "2025-03-18", to: "2025-03-19", status: "Pending" },
+    { patchName: "Linux Container Security Patch", severity: "High", computerName: "SRV-148", group: "servers", from: "2025-03-18", to: "2025-03-19", status: "Outstanding" },
     { patchName: "Office VBA Runtime Patch", severity: "Important", computerName: "WKS-149", group: "workstations", from: "2025-03-20", to: "2025-03-21", status: "Remediated" },
-    { patchName: "Windows Network Stack Patch", severity: "Critical", computerName: "SRV-150", group: "servers", from: "2025-03-22", to: "2025-03-23", status: "Pending" }
+    { patchName: "Windows Network Stack Patch", severity: "Critical", computerName: "SRV-150", group: "servers", from: "2025-03-22", to: "2025-03-23", status: "Outstanding" }
 ];
 
 // Pagination State
@@ -58,8 +58,8 @@ const rowsPerPage = 10;
 let filteredData = []; // Stores the fully filtered dataset
 
 /* -----------------------------
-    CUSTOM MULTI-SELECT SETUP (Top Filters)
-   ----------------------------- */
+    CUSTOM MULTI-SELECT SETUP (Top Filters)
+   ----------------------------- */
 function initMultiselect(multiselectId) {
     const multiselect = document.getElementById(multiselectId);
     const trigger = multiselect.querySelector('.multiselect-trigger');
@@ -133,13 +133,13 @@ document.addEventListener('click', function() {
     });
 });
 
-// Init multiselects
+// Init multiselects 
 initMultiselect('severityMultiselect');
-initMultiselect('groupMultiselect');
+// Group multiselect initiation removed
 
 /* -----------------------------
-    CUSTOM SINGLE-SELECT SETUP (Table Controls)
-   ----------------------------- */
+    CUSTOM SINGLE-SELECT SETUP (Table Controls & Group Filter)
+   ----------------------------- */
 function initCustomSelects() {
     document.querySelectorAll('.custom-select').forEach(select => {
         const trigger = select.querySelector('.select-trigger');
@@ -198,7 +198,7 @@ function initCustomSelects() {
                     text.textContent = 'Export';
                     select.dataset.value = '';
                 } else {
-                    // For other selects, apply filters (resets to page 1)
+                    // For other selects (Status, Severity2, Group), apply filters (resets to page 1)
                     applyFilters(1);
                 }
 
@@ -210,8 +210,8 @@ function initCustomSelects() {
 initCustomSelects();
 
 /* -----------------------------
-    Helpers to get selected values
-   ----------------------------- */
+    Helpers to get selected values
+   ----------------------------- */
 function getCustomSelectValue(id) {
     const sel = document.querySelector(`.custom-select[data-id="${id}"]`);
     if (!sel) return '';
@@ -224,14 +224,15 @@ function getSelectedValues(multiselectId) {
 }
 
 /* -----------------------------
-    PAGINATION & DISPLAY FUNCTIONS
-   ----------------------------- */
+    PAGINATION & DISPLAY FUNCTIONS
+   ----------------------------- */
+// ... (displayTableData, renderPagination, getStatusClass, getSeverityClass functions remain the same) ...
 
 /**
- * Renders the table body with the data for the current page.
- * @param {Array} data - The array of patches (already filtered) to display.
- * @param {number} page - The current page number.
- */
+ * Renders the table body with the data for the current page.
+ * @param {Array} data - The array of patches (already filtered) to display.
+ * @param {number} page - The current page number.
+ */
 function displayTableData(data, page) {
     const tableBody = document.getElementById('tableBody');
     tableBody.innerHTML = '';
@@ -273,13 +274,11 @@ function displayTableData(data, page) {
     });
 
     renderPagination(data.length, page);
-
-    // Apply any additional per-row styling if needed (not strictly necessary because badges handle look)
 }
 
 /**
- * Renders the pagination controls (Previous/Next buttons, page numbers).
- */
+ * Renders the pagination controls (Previous/Next buttons, page numbers).
+ */
 function renderPagination(totalItems, page) {
     const paginationContainer = document.getElementById('paginationContainer');
     paginationContainer.innerHTML = '';
@@ -371,13 +370,10 @@ function renderPagination(totalItems, page) {
     paginationContainer.appendChild(nextButton);
 }
 
-/* -----------------------------
-    Helpers for badge classes
-   ----------------------------- */
 function getStatusClass(status) {
     const s = (status || '').toLowerCase();
     if (s === 'remediated') return 'status-remediated';
-    if (s === 'pending') return 'status-pending';
+    if (s === 'outstanding') return 'status-pending';
     return '';
 }
 function getSeverityClass(sev) {
@@ -388,24 +384,56 @@ function getSeverityClass(sev) {
     return '';
 }
 
+
 /* -----------------------------
-    FILTERING CORE LOGIC
-   ----------------------------- */
+    KPI CARD LOGIC (Updated for Total Devices and Compliance)
+   ----------------------------- */
+
+function updateKpiCards(data) {
+    const totalDevices = data.length; // Total items in the current view/dataset
+    let remediatedPatches = 0;
+
+    data.forEach(item => {
+        // Count the patches that are remediated
+        if (item.status.toLowerCase() === 'remediated') {
+            remediatedPatches++;
+        }
+    });
+
+    // Calculation: Compliance = (Remediated Patches / Total Patches) * 100
+    let compliancePercentage = 0;
+    if (totalDevices > 0) {
+        compliancePercentage = (remediatedPatches / totalDevices) * 100;
+    }
+
+    // 1. Total Devices
+    document.getElementById('totalDevicesValue').textContent = totalDevices;
+
+    // 2. Compliance Percentage
+    document.getElementById('compliancePercentageValue').textContent = 
+        `${compliancePercentage.toFixed(1)}%`;
+}
+
+
+/* -----------------------------
+    FILTERING CORE LOGIC
+   ----------------------------- */
 
 /**
- * Calculates and filters the data based on all criteria.
- * Then calls displayTableData with the first page (or specified page).
- * @param {number} [page=1] - The page number to navigate to after filtering.
- */
+ * Calculates and filters the data based on all criteria.
+ * Then calls displayTableData with the first page (or specified page).
+ * @param {number} [page=1] - The page number to navigate to after filtering.
+ */
 function applyFilters(page = 1) {
-    // 1. Get filter values (Using custom select helper)
+    // 1. Get filter values
     const search = document.getElementById('search').value.toLowerCase();
     const status = getCustomSelectValue('status');
     const severity2 = getCustomSelectValue('severity2');
+    const group = getCustomSelectValue('group'); // Group is now a single select
+    
     const dateFrom = document.getElementById('dateFrom').value;
     const dateTo = document.getElementById('dateTo').value;
     const selectedSeverities = getSelectedValues('severityMultiselect');
-    const selectedGroups = getSelectedValues('groupMultiselect');
 
     // 2. Filter the entire dataset
     filteredData = sampleData.filter(item => {
@@ -422,14 +450,17 @@ function applyFilters(page = 1) {
         if (severity2 && item.severity.toLowerCase() !== severity2) {
             return false;
         }
+        
         // Multiselect Severity filter (Top Filter)
         if (selectedSeverities.length > 0 && !selectedSeverities.includes(item.severity.toLowerCase())) {
             return false;
         }
-        // Multiselect Group filter (Top Filter)
-        if (selectedGroups.length > 0 && !selectedGroups.includes(item.group.toLowerCase())) {
+        
+        // Single-select Group filter (Top Filter)
+        if (group && item.group.toLowerCase() !== group) {
             return false;
         }
+        
         // Date From filter
         if (dateFrom && item.from < dateFrom) {
             return false;
@@ -444,27 +475,39 @@ function applyFilters(page = 1) {
     // 3. Update current page and display the results
     currentPage = page;
     displayTableData(filteredData, currentPage);
+    
+    // Update KPI cards after filtering
+    updateKpiCards(filteredData);
 }
 
 /* -----------------------------
-    RESET FILTERS
-   ----------------------------- */
+    RESET FILTERS
+   ----------------------------- */
 function resetFilters() {
-    // clear multiselects
+    // clear multiselects (ONLY SEVERITY REMAINS)
     document.querySelectorAll('.custom-multiselect').forEach(multiselect => {
         const checkboxes = multiselect.querySelectorAll('input[type="checkbox"]');
         checkboxes.forEach(cb => cb.checked = false);
         const textElement = multiselect.querySelector('.multiselect-text');
-        const defaultText = multiselect.id === 'severityMultiselect' ? 'Severity' : 'Group';
-        textElement.textContent = defaultText;
+        // Only checks for severity multiselect
+        if (multiselect.id === 'severityMultiselect') {
+            textElement.textContent = 'Severity';
+        }
         multiselect.querySelector('.multiselect-dropdown').classList.remove('show');
         multiselect.querySelector('.multiselect-trigger').classList.remove('active');
     });
 
-    // reset custom selects (Status, Severity2, Export)
+    // reset custom selects (Status, Severity2, Export, and Group)
     document.querySelectorAll('.custom-select').forEach(s => {
         s.dataset.value = '';
-        s.querySelector('.select-text').textContent = s.dataset.id === 'status' ? 'Status' : (s.dataset.id === 'severity2' ? 'Severity' : 'Export');
+        
+        // Logic to set the default text based on data-id
+        let defaultText = s.dataset.id === 'status' ? 'Status' : 
+                          s.dataset.id === 'severity2' ? 'Severity' : 
+                          s.dataset.id === 'group' ? 'Group' : 'Export';
+        
+        s.querySelector('.select-text').textContent = defaultText;
+
         // Close dropdowns
         s.querySelector('.select-dropdown').classList.remove('show');
         s.querySelector('.select-trigger').classList.remove('active');
@@ -482,7 +525,7 @@ function resetFilters() {
     filteredData = [];
     currentPage = 1;
 
-    // Clear table and pagination UI
+    // Clear table and pagination UI (Table will show "No data available")
     document.getElementById('paginationContainer').innerHTML = '';
     const tableBody = document.getElementById('tableBody');
     tableBody.innerHTML = `
@@ -493,11 +536,14 @@ function resetFilters() {
             </td>
         </tr>
     `;
+    
+    // CRITICAL FIX: The KPI must be updated with empty data on RESET
+    updateKpiCards(filteredData); 
 }
 
 /* -----------------------------
-    Export helpers (CSV/Excel/PDF)
-   ----------------------------- */
+    Export helpers (CSV/Excel/PDF)
+   ----------------------------- */
 function exportToCSV() {
     if (filteredData.length === 0) {
         alert('No data to export. Please apply filters first to load data.');
@@ -556,14 +602,17 @@ function handleExport(type) {
     else if (type === 'pdf') exportToPDF();
 }
 
+
 /* -----------------------------
-    Event listeners & wiring
-   ----------------------------- */
+    Event listeners & wiring
+   ----------------------------- */
 document.getElementById('applyBtn').addEventListener('click', () => applyFilters(1));
 document.getElementById('resetBtn').addEventListener('click', resetFilters);
+document.getElementById('exportCsvBtn').addEventListener('click', exportToCSV);
 
 // Dynamic search trigger (re-filter and reset to page 1)
 document.getElementById('search').addEventListener('keyup', function() {
+    // Only filter if there is data loaded or if the user types more than 2 chars to search
     if (filteredData.length > 0 || this.value.length > 2) applyFilters(1);
 });
 
@@ -592,7 +641,10 @@ document.querySelectorAll('.custom-input input').forEach(inp => {
 });
 
 /* -----------------------------
-    Initialize default table (empty state)
-   ----------------------------- */
-// show empty initial state (no data until filters applied)
-resetFilters();
+    Initialize default table (Load All Data)
+   ----------------------------- */
+// 1. Run reset to clear inputs/dropdowns and set table to empty state
+resetFilters(); 
+
+// 2. Load ALL data and KPIs immediately on page load
+applyFilters(1);

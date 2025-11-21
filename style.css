@@ -2,12 +2,12 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f5f5f5;
+    background-color: #deedf1;
 }
 
 /* Navbar */
 .navbar {
-    background-color: #2c3e50;
+    background-color: #354656;
     color: white;
     padding: 1rem 2rem;
     display: flex;
@@ -15,9 +15,19 @@ body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 .logo {
-    width: 40px; height: 40px; background-color: #3498db; border-radius: 8px;
-    display: flex; align-items: center; justify-content: center; font-weight: bold;
-    font-size: 1.2rem; margin-right: 1rem;
+    width: 40px; height: 40px;
+    /* NEW: Use background image instead of text and solid color */
+    background-image: url('./assets/bigfix-logo.ico'); /* <<< CRITICAL: Adjust this relative path */
+    background-size: contain; /* Ensures the whole image fits */
+    background-repeat: no-repeat;
+    background-position: center; /* Centers the image within the div */
+   
+    border-radius: 8px; /* Keep rounded corners if desired */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    /* Removed: font-weight, font-size, background-color - these are no longer needed for an image logo */
 }
 .navbar h1 { font-size: 1.5rem; font-weight: 600; }
 
@@ -30,8 +40,17 @@ body {
     box-shadow: 0 1px 3px rgba(0,0,0,0.06);
 }
 .filter-row { display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; align-items: stretch; }
-.filter-group { flex: 1; min-width: 150px; display: flex; }
-.filter-group.wide { flex: 2; }
+/* CORE FLEX ADJUSTMENTS: Buttons are flex: 1, Inputs/Multiselects are flex: 1.5 */
+.filter-group { 
+    flex: 1; /* Default size for buttons (Apply/Reset) */
+    min-width: 120px; 
+    display: flex; 
+}
+.filter-group.filter-lg {
+    flex: 1.5; /* Larger size for inputs/multiselects (Severity/Group/Dates) */
+    min-width: 150px;
+}
+
 
 /* Multiselect */
 .custom-multiselect { position: relative; width: 100%; }
@@ -142,9 +161,15 @@ body {
     width:100%; padding:0.65rem 1rem 0.65rem 2.5rem; border:1px solid #ddd; border-radius:6px;
     font-size:0.95rem; transition:all .18s;
 }
+/* Styling for the Font Awesome search icon */
 .search-icon {
-    position:absolute; left:0.75rem; top:50%; transform:translateY(-50%);
-    font-size:1rem; opacity:0.5; pointer-events:none;
+    position:absolute; 
+    left:0.75rem; 
+    top:50%; 
+    transform:translateY(-50%);
+    font-size: 1rem;
+    opacity:0.5; 
+    pointer-events:none;
 }
 
 /* Buttons */
@@ -162,7 +187,79 @@ body {
     background-color:#7f8c8d; transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(149,165,166,0.12);
 }
+/* --- KPI/SUMMARY CARDS STYLING --- */
+.kpi-cards-container {
+    display: flex;
+    gap: 1.5rem; /* Space between cards */
+    margin-bottom: 1.5rem; /* Space below the cards, before the table */
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+}
 
+.kpi-card {
+    /* Base sizing for the Total Devices card */
+    flex: 1 1 250px; 
+    background: white;
+    padding: 1.25rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.kpi-card.wide-card {
+    /* Larger sizing for the main Compliance Percentage metric */
+    flex: 2 1 300px; 
+}
+
+.kpi-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+/* Icon Color Definitions */
+.kpi-icon i {
+    color: white; 
+}
+
+/* Specific background colors for the two new cards */
+.icon-compliance {
+    background-color: #1abc9c; /* Teal/Cyan color for compliance */
+}
+.icon-total {
+    background-color: #34495e; /* Darker blue/gray for Total Devices */
+}
+/* NOTE: Old colors like .icon-blue, .icon-green, .icon-red, are intentionally REMOVED/omitted here for cleanup. */
+
+.kpi-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.kpi-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.kpi-value {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #2c3e50;
+    line-height: 1;
+}
+
+/* Responsive adjustment for small screens */
+@media (max-width: 600px) {
+    .kpi-card {
+        flex-basis: 100%; /* Makes each card take full width on phones */
+    }
+}
 /* Table */
 .table-container {
     background:white; border-radius:8px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); overflow:hidden;
@@ -176,6 +273,28 @@ body {
 }
 .table-controls { display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap; }
 .table-controls .custom-select { flex: 1; min-width: 140px; }
+
+/* Adjust layout in table controls to manage button size */
+.table-controls button {
+    flex: 1; 
+    min-width: 140px;
+    max-width: 200px;
+}
+
+/* Tertiary button for exports (Matching primary blue style) */
+.btn-tertiary {
+    background-color: #3498db; 
+    color: white; 
+    border: none; 
+    padding: 0.75rem 1.5rem; 
+    border-radius: 10px; 
+    font-weight: 500;
+}
+.btn-tertiary:hover {
+    background-color: #2980b9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(52,152,219,0.15);
+}
 
 table { width:100%; border-collapse:collapse; min-width: 600px; }
 thead { background:#f8f9fa; }
@@ -250,7 +369,7 @@ tbody tr:hover { background:#f8f9fa; }
 }
 
 /* -------------------------------------- */
-/*            BADGE COLOR SYSTEM          */
+/*            BADGE COLOR SYSTEM          */
 /* -------------------------------------- */
 
 .status-badge,
@@ -292,12 +411,16 @@ tbody tr:hover { background:#f8f9fa; }
 
 /* Responsive */
 @media (max-width: 1024px) {
+    /* Adjust flex basis to maintain layout integrity on smaller screens */
+    .filter-group { flex-basis: 120px; }
+    .filter-group.filter-lg { flex-basis: 150px; }
+
     .table-controls .custom-select { flex:1 1 calc(33.333% - 0.5rem); min-width:120px; }
     .search-wrapper { flex:1 1 100%; width:100%; }
 }
 @media (max-width:768px) {
     .filter-row { flex-direction: column; }
-    .filter-group { width:100%; }
+    .filter-group, .filter-group.filter-lg { width:100%; flex-basis: auto; }
     .table-controls { flex-direction: column; }
     .table-controls .custom-select, .search-wrapper { width:100%; min-width:0; }
     .table-container { overflow-x:auto; }
