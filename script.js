@@ -630,6 +630,115 @@ document.getElementById('compSearchInput').addEventListener('keyup', () => {
 document.getElementById('exportCsvBtn').addEventListener('click', exportToCSV);
 document.getElementById('compExportBtn').addEventListener('click', exportCompToCSV);
 
-// Initialize Empty
-resetFilters();
-resetCompDashboard();
+// Dynamic search trigger (re-filter and reset to page 1)
+document.getElementById('search').addEventListener('keyup', function() {
+    // CRITICAL FIX: Always trigger filtering if search value exists, or if filtering has already occurred.
+    if (this.value.length >= 0) { 
+        applyFilters(1); .
+    }
+});
+
+// New custom date input wiring
+document.querySelectorAll('.date-input').forEach(input => {
+    input.addEventListener('click', function(e) {
+        e.stopPropagation();
+        
+        // Hide other open dropdowns first
+        document.querySelectorAll('.custom-select .select-dropdown.show').forEach(d => d.classList.remove('show'));
+        
+        // Determine position based on the input clicked
+        const rect = input.getBoundingClientRect();
+        
+        // Position the calendar below the input
+        datePickerPopup.style.top = `${rect.top + rect.height + 10}px`;
+        datePickerPopup.style.left = `${rect.left}px`;
+        datePickerPopup.style.display = 'block';
+
+        activeInput = input;
+        
+        // Render the calendar starting from today or the selected date
+        let initialDate = input.value ? new Date(input.value.split('-').reverse().join('-')) : new Date();
+        currentCalendarDate = initialDate;
+        renderCalendar(currentCalendarDate);
+    });
+
+    // Keep the change listener for filtering when a date is selected
+    input.addEventListener('change', () => {
+        toggleFilledClass(input.id);
+        if (input.value) applyFilters(1); 
+    });
+});
+
+// helper to mark inputs as filled so label floats
+function toggleFilledClass(id) {
+    const input = document.getElementById(id);
+    const parent = input.closest('.custom-input');
+    if (!parent) return;
+    if (input.value) parent.classList.add('filled');
+    else parent.classList.remove('filled');
+}
+
+// initialize filled state on load (in case of pre-filled values)
+document.querySelectorAll('.custom-input input').forEach(inp => {
+    if (inp.value) inp.closest('.custom-input').classList.add('filled');
+});
+
+/* -----------------------------
+    Initialize default table (Load All Data)
+   ----------------------------- */
+// 1. Run reset to clear inputs/dropdowns and set table to empty state
+resetFilters(); 
+
+// 2. Load ALL data and KPIs immediately on page load
+applyFilters(1);
+// --- New Functions for the Custom Year Dropdown ---
+
+function toggleYearDropdown(e) {
+    e.stopPropagation();
+    const list = document.getElementById('yearDropdownList');
+    list.classList.toggle('show');
+    
+    // Auto-scroll to the selected year
+    if (list.classList.contains('show')) {
+        const selected = list.querySelector('.selected');
+        if (selected) {
+            selected.scrollIntoView({ block: 'center' });
+        }
+    }
+}
+
+function selectYearFromList(year, e) {
+    e.stopPropagation();
+    jumpToYear(year); // Use existing logic
+    // The calendar re-renders, so the dropdown closes automatically
+}
+
+// Close the year dropdown if clicking anywhere else inside the calendar
+datePickerPopup.addEventListener('click', function() {
+    const list = document.getElementById('yearDropdownList');
+    if (list && list.classList.contains('show')) {
+        list.classList.remove('show');
+    }
+});
+
+// Expose new function globally
+window.toggleYearDropdown = toggleYearDropdown;
+window.selectYearFromList = selectYearFromList;
+// ... existing code ...
+
+// NEW: Close calendar when clicking outside
+document.addEventListener('click', function(event) {
+    const calendar = document.getElementById('datePickerPopup');
+    const isClickInsideCalendar = calendar.contains(event.target);
+    const isClickOnInput = event.target.classList.contains('date-input');
+
+    // If the click is NOT inside the calendar AND NOT on an input field
+    if (!isClickInsideCalendar && !isClickOnInput) {
+        calendar.style.display = 'none';
+        // Also close the year dropdown if it happened to be open
+        const yearList = document.getElementById('yearDropdownList');
+        if (yearList) yearList.classList.remove('show');
+        
+        activeInput = null;
+    }
+});
