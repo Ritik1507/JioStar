@@ -187,7 +187,79 @@ body {
     background-color:#7f8c8d; transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(149,165,166,0.12);
 }
+/* --- KPI/SUMMARY CARDS STYLING --- */
+.kpi-cards-container {
+    display: flex;
+    gap: 1.5rem; /* Space between cards */
+    margin-bottom: 1.5rem; /* Space below the cards, before the table */
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+}
 
+.kpi-card {
+    /* Base sizing for the Total Devices card */
+    flex: 1 1 250px; 
+    background: white;
+    padding: 1.25rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.kpi-card.wide-card {
+    /* Larger sizing for the main Compliance Percentage metric */
+    flex: 2 1 300px; 
+}
+
+.kpi-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+/* Icon Color Definitions */
+.kpi-icon i {
+    color: white; 
+}
+
+/* Specific background colors for the two new cards */
+.icon-compliance {
+    background-color: #1abc9c; /* Teal/Cyan color for compliance */
+}
+.icon-total {
+    background-color: #34495e; /* Darker blue/gray for Total Devices */
+}
+/* NOTE: Old colors like .icon-blue, .icon-green, .icon-red, are intentionally REMOVED/omitted here for cleanup. */
+
+.kpi-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.kpi-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.kpi-value {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #2c3e50;
+    line-height: 1;
+}
+
+/* Responsive adjustment for small screens */
+@media (max-width: 600px) {
+    .kpi-card {
+        flex-basis: 100%; /* Makes each card take full width on phones */
+    }
+}
 /* Table */
 .table-container {
     background:white; border-radius:8px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); overflow:hidden;
