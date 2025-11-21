@@ -548,3 +548,77 @@ tbody tr:hover { background:#f8f9fa; }
     align-items: center;
     margin-bottom: 10px;
 }
+/* --- Custom Year Dropdown Styling --- */
+.year-select-container {
+    position: relative;
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.year-select-trigger {
+    padding: 5px 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 70px;
+}
+
+.year-select-trigger:hover {
+    border-color: #3498db;
+}
+
+.year-dropdown-list {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 105%;
+    left: 0;
+    width: 100%;
+    
+    /* CRITICAL: This limits the height and adds the scrollbar */
+    max-height: 150px; 
+    overflow-y: auto; 
+    
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 3000;
+}
+
+.year-dropdown-list.show {
+    display: block;
+}
+
+.year-option {
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.1s;
+}
+
+.year-option:hover {
+    background-color: #f0f8ff;
+}
+
+.year-option.selected {
+    background-color: #3498db;
+    color: white;
+}
+
+/* Custom scrollbar styling for a cleaner look */
+.year-dropdown-list::-webkit-scrollbar {
+    width: 6px;
+}
+.year-dropdown-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.year-dropdown-list::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}

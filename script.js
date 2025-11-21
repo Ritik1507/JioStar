@@ -447,36 +447,34 @@ function renderCalendar(date) {
     const year = date.getFullYear();
     const month = date.getMonth(); 
     
-    // Get month name
     const today = new Date();
     const currentYear = today.getFullYear();
-    const currentMonth = today.getMonth(); // 0-indexed (0 = Jan, 10 = Nov)
-    const currentDay = today.getDate(); // 1-indexed (1-31)
+    const currentMonth = today.getMonth(); 
 
-    // --- Dynamic Month & Year Selects ---
-    let yearOptions = '';
-    const startYear = today.getFullYear() - 50; // Use your current -50 setting
-    const endYear = currentYear;    // CRITICAL FIX: Stop at the current year
-    
-    for (let y = startYear; y <= endYear; y++) {
-        const selected = y === year ? 'selected' : '';
-        yearOptions += `<option value="${y}" ${selected}>${y}</option>`;
-    }
-
+    // --- Dynamic Month Select (Standard Select) ---
     let monthOptions = '';
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     monthNames.forEach((name, m) => {
         let disabled = '';
         const selected = m === month ? 'selected' : '';
-        
-        // Disable months IF the current calendar year is the actual current year
-        // AND the month being generated (m) is greater than the actual current month (currentMonth)
         if (year === currentYear && m > currentMonth) {
             disabled = 'disabled';
         }
-        
         monthOptions += `<option value="${m}" ${selected} ${disabled}>${name}</option>`;
     });
+
+    // --- Dynamic Year List (Custom Div Structure) ---
+    // Range: 50 years back to current year
+    const startYear = currentYear - 50; 
+    const endYear = currentYear;
+    
+    let yearListHtml = '';
+    // Loop backwards so current year is at top
+    for (let y = endYear; y >= startYear; y--) {
+        const selectedClass = y === year ? 'selected' : '';
+        // Instead of <option>, we create divs
+        yearListHtml += `<div class="year-option ${selectedClass}" onclick="selectYearFromList(${y}, event)">${y}</div>`;
+    }
 
     // Calculate days
     const firstDayOfMonth = new Date(year, month, 1).getDay();
@@ -484,44 +482,42 @@ function renderCalendar(date) {
 
     let html = '<div class="custom-calendar">';
     
-    // Header with SELECT inputs
+    // Header
     html += `<div class="cal-header">
                 <button class="cal-nav-btn" onclick="navigateMonth(-1)">&#9664;</button>
                 
-                <select class="cal-select" id="monthSelect" onchange="jumpToMonth(this.value)">${monthOptions}</select>
-                <select class="cal-select" id="yearSelect" onchange="jumpToYear(this.value)">${yearOptions}</select>
+                <div style="display:flex; align-items:center;">
+                    <select class="cal-select" id="monthSelect" onchange="jumpToMonth(this.value)">${monthOptions}</select>
+                    
+                    <div class="year-select-container">
+                        <div class="year-select-trigger" onclick="toggleYearDropdown(event)">
+                            ${year} <span>&#9662;</span>
+                        </div>
+                        <div class="year-dropdown-list" id="yearDropdownList">
+                            ${yearListHtml}
+                        </div>
+                    </div>
+                </div>
 
                 <button class="cal-nav-btn" onclick="navigateMonth(1)">&#9654;</button>
             </div>`;
     
-    // Days of the week header
+    // Days Grid
     html += '<div class="cal-days">';
     const dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    dayLabels.forEach(label => {
-        html += `<span class="day-label">${label}</span>`;
-    });
+    dayLabels.forEach(label => html += `<span class="day-label">${label}</span>`);
 
-    // Blanks for start of month
-    for (let i = 0; i < firstDayOfMonth; i++) {
-        html += '<span></span>';
-    }
+    for (let i = 0; i < firstDayOfMonth; i++) html += '<span></span>';
 
-    // Days of the month
     for (let day = 1; day <= daysInMonth; day++) {
         const currentDayDate = new Date(year, month, day);
-        // Date format to write to input (DD-MM-YYYY)
         const displayDate = formatToDisplay(currentDayDate); 
         
-        // --- START DAY DISABLING LOGIC ---
         let dayDisabled = '';
-        // Disable days IF the current calendar month/year is the actual current month/year
-        // AND the day being generated (day) is greater than the actual current day (currentDay)
-        if (year === currentYear && month === currentMonth && day > currentDay) {
+        if (year === currentYear && month === currentMonth && day > today.getDate()) {
             dayDisabled = 'disabled';
         }
-        // --- END DAY DISABLING LOGIC ---
         
-        // Highlight logic
         const isSelected = activeInput && activeInput.value === displayDate;
         const selectedClass = isSelected ? 'selected' : '';
 
@@ -826,3 +822,36 @@ resetFilters();
 
 // 2. Load ALL data and KPIs immediately on page load
 applyFilters(1);
+// --- New Functions for the Custom Year Dropdown ---
+
+function toggleYearDropdown(e) {
+    e.stopPropagation();
+    const list = document.getElementById('yearDropdownList');
+    list.classList.toggle('show');
+    
+    // Auto-scroll to the selected year
+    if (list.classList.contains('show')) {
+        const selected = list.querySelector('.selected');
+        if (selected) {
+            selected.scrollIntoView({ block: 'center' });
+        }
+    }
+}
+
+function selectYearFromList(year, e) {
+    e.stopPropagation();
+    jumpToYear(year); // Use existing logic
+    // The calendar re-renders, so the dropdown closes automatically
+}
+
+// Close the year dropdown if clicking anywhere else inside the calendar
+datePickerPopup.addEventListener('click', function() {
+    const list = document.getElementById('yearDropdownList');
+    if (list && list.classList.contains('show')) {
+        list.classList.remove('show');
+    }
+});
+
+// Expose new function globally
+window.toggleYearDropdown = toggleYearDropdown;
+window.selectYearFromList = selectYearFromList;
