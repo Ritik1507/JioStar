@@ -855,3 +855,21 @@ datePickerPopup.addEventListener('click', function() {
 // Expose new function globally
 window.toggleYearDropdown = toggleYearDropdown;
 window.selectYearFromList = selectYearFromList;
+// ... existing code ...
+
+// NEW: Close calendar when clicking outside
+document.addEventListener('click', function(event) {
+    const calendar = document.getElementById('datePickerPopup');
+    const isClickInsideCalendar = calendar.contains(event.target);
+    const isClickOnInput = event.target.classList.contains('date-input');
+
+    // If the click is NOT inside the calendar AND NOT on an input field
+    if (!isClickInsideCalendar && !isClickOnInput) {
+        calendar.style.display = 'none';
+        // Also close the year dropdown if it happened to be open
+        const yearList = document.getElementById('yearDropdownList');
+        if (yearList) yearList.classList.remove('show');
+        
+        activeInput = null;
+    }
+});
