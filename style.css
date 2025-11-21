@@ -16,23 +16,63 @@ body {
 }
 .logo {
     width: 40px; height: 40px;
-    /* NEW: Use background image instead of text and solid color */
-    background-image: url('./assets/bigfix-logo.ico'); /* <<< CRITICAL: Adjust this relative path */
-    background-size: contain; /* Ensures the whole image fits */
+    background-image: url('./assets/bigfix-logo.ico'); 
+    background-size: contain;
     background-repeat: no-repeat;
-    background-position: center; /* Centers the image within the div */
-   
-    border-radius: 8px; /* Keep rounded corners if desired */
+    background-position: center;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 1rem;
-    /* Removed: font-weight, font-size, background-color - these are no longer needed for an image logo */
 }
 .navbar h1 { font-size: 1.5rem; font-weight: 600; }
 
+/* --- NEW: TAB NAVIGATION STYLES --- */
+.tab-nav {
+    background-color: #fff;
+    padding: 0 40px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    gap: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+.tab-btn {
+    padding: 15px 5px;
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: #6c757d;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+.tab-btn:hover {
+    color: #3498db;
+}
+.tab-btn.active {
+    color: #114b71; /* Dark Blue */
+    border-bottom: 3px solid #3498db; /* Light Blue underline */
+}
+.tab-btn i {
+    margin-right: 8px;
+}
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+}
+.tab-content.active {
+    display: block;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 /* Layout */
-.container { padding: 2rem; max-width: 1400px; margin: 0 auto; }
+.container { max-width: 1400px; margin: 0 auto; }
 
 /* Filters */
 .filters {
@@ -40,17 +80,16 @@ body {
     box-shadow: 0 1px 3px rgba(0,0,0,0.06);
 }
 .filter-row { display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; align-items: stretch; }
-/* CORE FLEX ADJUSTMENTS: Buttons are flex: 1, Inputs/Multiselects are flex: 1.5 */
+
 .filter-group { 
-    flex: 1; /* Default size for buttons (Apply/Reset) */
+    flex: 1; 
     min-width: 120px; 
     display: flex; 
 }
 .filter-group.filter-lg {
-    flex: 1.5; /* Larger size for inputs/multiselects (Severity/Group/Dates) */
+    flex: 1.5; 
     min-width: 150px;
 }
-
 
 /* Multiselect */
 .custom-multiselect { position: relative; width: 100%; }
@@ -111,130 +150,46 @@ body {
     background: #eef6ff; color: #0b63b3;
 }
 
-/* Modern Input (floating label for Date From / To) */
+/* Modern Input */
 .custom-input { position: relative; width: 100%; }
-
 .custom-input input {
-    width: 100%;
-    padding: 0.85rem 1rem;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    font-size: 0.95rem;
-    color: #333;
-    transition: all 0.18s ease;
-    cursor: pointer;
+    width: 100%; padding: 0.85rem 1rem; background: #fff; border: 1px solid #ddd; border-radius: 10px;
+    font-size: 0.95rem; color: #333; transition: all 0.18s ease; cursor: pointer;
 }
-
-.custom-input input:hover { border-color: #3498db; }
-
-.custom-input input:focus {
-    border-color: #3498db;
-    box-shadow: 0 0 0 3px rgba(52,152,219,0.08);
-    outline: none;
-}
-
+.custom-input input:hover, .custom-input input:focus { border-color: #3498db; outline: none; }
+.custom-input input:focus { box-shadow: 0 0 0 3px rgba(52,152,219,0.08); }
 .custom-input label {
-    position: absolute;
-    top: 50%;
-    left: 1rem;
-    transform: translateY(-50%);
-    background: white;
-    padding: 0 0.25rem;
-    color: #6c757d;
-    font-size: 0.9rem;
-    pointer-events: none;
-    transition: all 0.15s ease;
+    position: absolute; top: 50%; left: 1rem; transform: translateY(-50%);
+    background: white; padding: 0 0.25rem; color: #6c757d; font-size: 0.9rem;
+    pointer-events: none; transition: all 0.15s ease;
 }
 
-/* --- Custom Date Input / Calendar Icon Styling --- */
-.custom-date-wrapper {
-    position: relative; 
-}
-
-.custom-date-wrapper input {
-    /* Set padding to accommodate the icon on the right */
-    padding-right: 2.5rem; 
-    /* Remove native calendar appearance */
-    appearance: none;
-    -webkit-appearance: none;
-    cursor: pointer;
-}
-
+/* Date Input specific */
+.custom-date-wrapper { position: relative; }
+.custom-date-wrapper input { padding-right: 2.5rem; appearance: none; -webkit-appearance: none; }
 .calendar-icon {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #6c757d;
-    font-size: 1rem;
-    pointer-events: none; /* Icon should not interfere with click events on the input */
+    position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
+    color: #6c757d; font-size: 1rem; pointer-events: none;
 }
-
-/* Fix floating label for text inputs (since we removed type="date") */
 .custom-input input:not(:placeholder-shown) + label,
 .custom-input input:focus + label,
 .custom-input input[readonly]:not([value=""]) + label { 
-    top: -6px;
-    font-size: 0.75rem;
-    color: #3498db;
+    top: -6px; font-size: 0.75rem; color: #3498db;
 }
 
-/* Base style for the popup container (we will dynamically populate and position this) */
+/* Calendar Popup */
 #datePickerPopup {
-    position: absolute;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-    z-index: 2000;
-    display: none; /* Hidden by default */
-    padding: 15px;
+    position: absolute; background: white; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    z-index: 2000; display: none; padding: 15px;
 }
-
-/* Simple Calendar Visuals (Basic Mockup) */
-.custom-calendar {
-    font-size: 0.9rem;
-    color: #333;
-    width: 250px;
-}
-.cal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-.cal-nav-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #3498db;
-    font-weight: bold;
-    padding: 5px;
-}
-.cal-days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 2px;
-    text-align: center;
-}
-.cal-days span {
-    padding: 5px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.1s;
-}
-.cal-days span:hover {
-    background: #f0f8ff;
-}
-.cal-days .day-label {
-    font-weight: 600;
-    color: #95a5a6;
-    padding-bottom: 5px;
-}
-.cal-days .selected {
-    background-color: #3498db;
-    color: white;
-}
+.custom-calendar { font-size: 0.9rem; color: #333; width: 250px; }
+.cal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.cal-nav-btn { background: none; border: none; cursor: pointer; color: #3498db; font-weight: bold; padding: 5px; }
+.cal-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; text-align: center; }
+.cal-days span { padding: 5px; cursor: pointer; border-radius: 4px; transition: background-color 0.1s; }
+.cal-days span:hover { background: #f0f8ff; }
+.cal-days .day-label { font-weight: 600; color: #95a5a6; padding-bottom: 5px; }
+.cal-days .selected { background-color: #3498db; color: white; }
 
 /* Search bar */
 .search-wrapper { position:relative; flex: 2; min-width: 250px; }
@@ -242,15 +197,9 @@ body {
     width:100%; padding:0.65rem 1rem 0.65rem 2.5rem; border:1px solid #ddd; border-radius:6px;
     font-size:0.95rem; transition:all .18s;
 }
-/* Styling for the Font Awesome search icon */
 .search-icon {
-    position:absolute; 
-    left:0.75rem; 
-    top:50%; 
-    transform:translateY(-50%);
-    font-size: 1rem;
-    opacity:0.5; 
-    pointer-events:none;
+    position:absolute; left:0.75rem; top:50%; transform:translateY(-50%);
+    font-size: 1rem; opacity:0.5; pointer-events:none;
 }
 
 /* Buttons */
@@ -259,243 +208,101 @@ body {
     font-size:0.95rem; font-weight:500; cursor:pointer; transition:all .18s;
 }
 .btn-primary { background-color:#3498db; color:white; }
-.btn-primary:hover {
-    background-color:#2980b9; transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(52,152,219,0.15);
-}
+.btn-primary:hover { background-color:#2980b9; transform: translateY(-1px); box-shadow: 0 4px 8px rgba(52,152,219,0.15); }
 .btn-secondary { background-color:#95a5a6; color:white; }
-.btn-secondary:hover {
-    background-color:#7f8c8d; transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(149,165,166,0.12);
-}
-/* --- KPI/SUMMARY CARDS STYLING --- */
-.kpi-cards-container {
-    display: flex;
-    gap: 1.5rem; /* Space between cards */
-    margin-bottom: 1.5rem; /* Space below the cards, before the table */
-    flex-wrap: wrap; /* Allows wrapping on smaller screens */
-}
+.btn-secondary:hover { background-color:#7f8c8d; transform: translateY(-1px); box-shadow: 0 4px 8px rgba(149,165,166,0.12); }
 
+/* KPI Cards */
+.kpi-cards-container { display: flex; gap: 1.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
 .kpi-card {
-    /* Base sizing for the Total Devices card */
-    flex: 1 1 250px; 
-    background: white;
-    padding: 1.25rem 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
+    flex: 1 1 250px; background: white; padding: 1.25rem 1.5rem; border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease ;
 
-.kpi-card.wide-card {
-    /* Larger sizing for the main Compliance Percentage metric */
-    flex: 2 1 300px; 
+    border: 1px solid transparent;
 }
-
+.kpi-card:hover {
+    transform: translateY(-3px); /* Moves the card up slightly */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1); /* Adds a deeper shadow */
+    border-color: #2980b9;
+    
+}
 .kpi-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.3rem;
+    width: 50px; height: 50px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
 }
+.kpi-icon i { color: white; }
+.icon-compliance { background-color: #1abc9c; }
+.icon-total { background-color: #34495e; }
+.kpi-content { display: flex; flex-direction: column; }
+.kpi-label { font-size: 0.9rem; color: #6c757d; font-weight: 500; }
+.kpi-value { font-size: 1.6rem; font-weight: 700; color: #2c3e50; line-height: 1; }
 
-/* Icon Color Definitions */
-.kpi-icon i {
-    color: white; 
-}
-
-/* Specific background colors for the two new cards */
-.icon-compliance {
-    background-color: #1abc9c; /* Teal/Cyan color for compliance */
-}
-.icon-total {
-    background-color: #34495e; /* Darker blue/gray for Total Devices */
-}
-/* NOTE: Old colors like .icon-blue, .icon-green, .icon-red, are intentionally REMOVED/omitted here for cleanup. */
-
-.kpi-content {
-    display: flex;
-    flex-direction: column;
-}
-
-.kpi-label {
-    font-size: 0.9rem;
-    color: #6c757d;
-    font-weight: 500;
-}
-
-.kpi-value {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #2c3e50;
-    line-height: 1;
-}
-
-/* Responsive adjustment for small screens */
-@media (max-width: 600px) {
-    .kpi-card {
-        flex-basis: 100%; /* Makes each card take full width on phones */
-    }
-}
 /* Table */
-.table-container {
-    background:white; border-radius:8px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); overflow:hidden;
-}
-.table-header {
-    padding:1.5rem 1.5rem 1rem 1.5rem; border-bottom:1px solid #dee2e6;
-}
+.table-container { background:white; border-radius:8px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); overflow:hidden; }
+.table-header { padding:1.5rem 1.5rem 1rem 1.5rem; border-bottom:1px solid #dee2e6; }
 .table-header h2 { font-size:1.25rem; color:#2c3e50; margin:0; }
-.table-controls-row {
-    padding:1rem 1.5rem 1.5rem 1.5rem;
-}
+.table-controls-row { padding:1rem 1.5rem 1.5rem 1.5rem; }
 .table-controls { display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap; }
 .table-controls .custom-select { flex: 1; min-width: 140px; }
-
-/* Adjust layout in table controls to manage button size */
-.table-controls button {
-    flex: 1; 
-    min-width: 140px;
-    max-width: 200px;
-}
-
-/* Tertiary button for exports (Matching primary blue style) */
-.btn-tertiary {
-    background-color: #3498db; 
-    color: white; 
-    border: none; 
-    padding: 0.75rem 1.5rem; 
-    border-radius: 10px; 
-    font-weight: 500;
-}
-.btn-tertiary:hover {
-    background-color: #2980b9;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(52,152,219,0.15);
-}
+.table-controls button { flex: 1; min-width: 140px; max-width: 200px; }
+.btn-tertiary { background-color: #3498db; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 10px; font-weight: 500; }
+.btn-tertiary:hover { background-color: #2980b9; transform: translateY(-1px); box-shadow: 0 4px 8px rgba(52,152,219,0.15); }
 
 table { width:100%; border-collapse:collapse; min-width: 600px; }
 thead { background:#f8f9fa; }
-th {
-    padding:1rem; text-align:left; font-weight:600; color:#2c3e50;
-    border-bottom:2px solid #dee2e6;
-}
+th { padding:1rem; text-align:left; font-weight:600; color:#2c3e50; border-bottom:2px solid #dee2e6; }
 td { padding:1rem; border-bottom:1px solid #dee2e6; color:#495057; }
 tbody tr:hover { background:#f8f9fa; }
 .empty-state { text-align:center; padding:3rem; color:#6c757d; }
-.empty-state-icon {
-    font-size:3rem; margin-bottom:1rem; opacity:0.3;
-}
+.empty-state-icon { font-size:3rem; margin-bottom:1rem; opacity:0.3; }
 
 /* Pagination */
-.pagination-container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 1rem 0;
-    margin-top: 1rem;
-    font-size: 0.9rem;
-}
-
+.pagination-container { display: flex; justify-content: flex-end; align-items: center; padding: 1rem 0; margin-top: 1rem; font-size: 0.9rem; }
 .pagination-info { margin-right: 1rem; color: #6c757d; }
+.pagination-button { background-color: white; color: #3498db; border: 1px solid #ddd; padding: 0.5rem 1rem; margin-left: 0.5rem; border-radius: 6px; cursor: pointer; transition: all 0.2s ease; font-weight: 500; }
+.pagination-button:hover:not(:disabled) { background-color: #f0f8ff; border-color: #3498db; }
+.pagination-button:disabled { cursor: not-allowed; opacity: 0.5; background-color: #f8f9fa; color: #95a5a6; border-color: #eee; }
+.page-number { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; background-color: white; color: #3498db; border: 1px solid #ddd; border-radius: 6px; margin: 0 0.25rem; cursor: pointer; transition: background-color 0.2s; font-weight: 500; }
+.page-number.active { background-color: #3498db; color: white; border-color: #3498db; }
 
-.pagination-button {
-    background-color: white;
-    color: #3498db;
-    border: 1px solid #ddd;
-    padding: 0.5rem 1rem;
-    margin-left: 0.5rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-weight: 500;
+/* Status Badges */
+.status-badge, .severity-badge { padding: 4px 10px; border-radius: 8px; font-size: 13px; font-weight: 600; text-transform: capitalize; display: inline-block; }
+.status-remediated { background-color: #d1f7d6; color: #0e7c24; }
+.status-pending { background-color: #ffd6d6; color: #a40000; }
+.severity-critical { background-color: #ffcccc; color: #a10000; }
+.severity-important { background-color: #fff4cc; color: #b38b00; }
+.severity-high { background-color: #d5f5d5; color: #0f6f1c; }
+
+/* Online/Offline Specifics for Computer Tab */
+.status-online {
+    background-color: #d1f7d6; /* Light Green Background */
+    color: #0e7c24;            /* Dark Green Text */
 }
 
-.pagination-button:hover:not(:disabled) {
-    background-color: #f0f8ff;
-    border-color: #3498db;
+.status-offline {
+    background-color: #ffd6d6; /* Light Red Background */
+    color: #a40000;            /* Dark Red Text */
 }
 
-.pagination-button:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-    background-color: #f8f9fa;
-    color: #95a5a6;
-    border-color: #eee;
-}
+/* Calendar Jumpers */
+.cal-select { -webkit-appearance: none; -moz-appearance: none; appearance: none; padding: 5px 8px; margin: 0 4px; background-color: white; color: #2c3e50; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem; font-weight: 600; cursor: pointer; text-align: center; transition: border-color 0.15s; background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%236c757d' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 8px center; background-size: 8px 10px; padding-right: 20px; }
+.cal-select:hover { border-color: #3498db; }
+.year-select-container { position: relative; display: inline-block; margin: 0 5px; }
+.year-select-trigger { padding: 5px 10px; background-color: white; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: space-between; min-width: 70px; }
+.year-select-trigger:hover { border-color: #3498db; }
+.year-dropdown-list { display: none; position: absolute; top: 105%; left: 0; width: 100%; max-height: 150px; overflow-y: auto; background: white; border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 3000; }
+.year-dropdown-list.show { display: block; }
+.year-option { padding: 6px 10px; cursor: pointer; font-size: 0.9rem; transition: background 0.1s; }
+.year-option:hover { background-color: #f0f8ff; }
+.year-option.selected { background-color: #3498db; color: white; }
+.year-dropdown-list::-webkit-scrollbar { width: 6px; }
+.year-dropdown-list::-webkit-scrollbar-track { background: #f1f1f1; }
+.year-dropdown-list::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 3px; }
 
-.page-number {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    background-color: white;
-    color: #3498db;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    margin: 0 0.25rem;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    font-weight: 500;
-}
-
-.page-number.active {
-    background-color: #3498db;
-    color: white;
-    border-color: #3498db;
-}
-
-/* -------------------------------------- */
-/*            BADGE COLOR SYSTEM          */
-/* -------------------------------------- */
-
-.status-badge,
-.severity-badge {
-    padding: 4px 10px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    text-transform: capitalize;
-    display: inline-block;
-}
-
-/* STATUS COLORS */
-.status-remediated {
-    background-color: #d1f7d6;
-    color: #0e7c24;
-}
-
-.status-pending {
-    background-color: #ffd6d6;
-    color: #a40000;
-}
-
-/* SEVERITY COLORS */
-.severity-critical {
-    background-color: #ffcccc;
-    color: #a10000;
-}
-
-.severity-important {
-    background-color: #fff4cc;
-    color: #b38b00;
-}
-
-.severity-high {
-    background-color: #d5f5d5;
-    color: #0f6f1c;
-}
-
-/* Responsive */
+/* Media Queries */
 @media (max-width: 1024px) {
-    /* Adjust flex basis to maintain layout integrity on smaller screens */
     .filter-group { flex-basis: 120px; }
     .filter-group.filter-lg { flex-basis: 150px; }
-
     .table-controls .custom-select { flex:1 1 calc(33.333% - 0.5rem); min-width:120px; }
     .search-wrapper { flex:1 1 100%; width:100%; }
 }
@@ -507,118 +314,4 @@ tbody tr:hover { background:#f8f9fa; }
     .table-container { overflow-x:auto; }
     table { min-width: 800px; }
     .pagination-container { justify-content: center; flex-wrap: wrap; }
-}
-/* Styling for the Calendar Jumper Selects */
-.cal-select {
-    /* Base appearance removal for cross-browser consistency */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    
-    padding: 5px 8px;
-    margin: 0 4px;
-    
-    /* Style to blend with dashboard */
-    background-color: white; /* White background */
-    color: #2c3e50; /* Dark text */
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    text-align: center;
-    transition: border-color 0.15s;
-    
-    /* Custom arrow icon using CSS */
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%236c757d' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 8px center;
-    background-size: 8px 10px;
-    padding-right: 20px; /* Space for the custom arrow */
-}
-
-.cal-select:hover {
-    border-color: #3498db;
-}
-
-/* Ensure the header container aligns items correctly */
-.cal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-/* --- Custom Year Dropdown Styling --- */
-.year-select-container {
-    position: relative;
-    display: inline-block;
-    margin: 0 5px;
-}
-
-.year-select-trigger {
-    padding: 5px 10px;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-width: 70px;
-}
-
-.year-select-trigger:hover {
-    border-color: #3498db;
-}
-
-.year-dropdown-list {
-    display: none; /* Hidden by default */
-    position: absolute;
-    top: 105%;
-    left: 0;
-    width: 100%;
-    
-    /* CRITICAL: This limits the height and adds the scrollbar */
-    max-height: 150px; 
-    overflow-y: auto; 
-    
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    z-index: 3000;
-}
-
-.year-dropdown-list.show {
-    display: block;
-}
-
-.year-option {
-    padding: 6px 10px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: background 0.1s;
-}
-
-.year-option:hover {
-    background-color: #f0f8ff;
-}
-
-.year-option.selected {
-    background-color: #3498db;
-    color: white;
-}
-
-/* Custom scrollbar styling for a cleaner look */
-.year-dropdown-list::-webkit-scrollbar {
-    width: 6px;
-}
-.year-dropdown-list::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-.year-dropdown-list::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 3px;
 }
