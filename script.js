@@ -102,6 +102,8 @@ const sampleData = [
     { patchName: 'Kubernetes 1.29 Upgrade', severity: 'Important', computerName: 'SRV-198', group: 'Servers', from: '06/04/2024', to: '07/04/2024', status: 'Outstanding', owner: 'Alice Smith', releaseDate: '28/03/2024' },
     { patchName: 'Java Runtime Update 8u421', severity: 'Important', computerName: 'LAP-199', group: 'Laptops', from: '12/05/2024', to: '13/05/2024', status: 'Outstanding', owner: 'Bob Jones', releaseDate: '09/05/2024' },
     { patchName: 'Firefox Patch 123.2', severity: 'Critical', computerName: 'LAP-200', group: 'Laptops', from: '06/04/2024', to: '07/04/2024', status: 'Outstanding', owner: 'Network Team', releaseDate: '31/03/2024' },
+    { patchName: 'Firefox Patch 123.3', severity: 'Critical', computerName: 'LAP-200', group: 'Laptops', from: '06/04/2024', to: '07/04/2024', status: 'Outstanding', owner: 'Network Team', releaseDate: '31/03/2024' },
+    { patchName: 'Firefox Patch 123.4', severity: 'Critical', computerName: 'LAP-200', group: 'Laptops', from: '06/04/2024', to: '07/04/2024', status: 'Outstanding', owner: 'Network Team', releaseDate: '31/03/2024' },
 ];
 
 // ==========================================
@@ -362,6 +364,277 @@ const envComplianceData = {
 
 
 
+
+const osComplianceData = {
+    'Windows': {
+        totalPatches: 210,
+        remediatedPatches: 185,
+        details: [
+            {
+                patchName: 'Windows 11 Cumulative Update KB5031234',
+                severity: 'Critical',
+                computerName: 'WIN-SRV-01',
+                from: '2024-11-12',
+                to: '2024-11-15',
+                releaseDate: '2024-11-10',
+                owner: 'Windows Admin Team',
+                status: 'Remediated'
+            },
+            {
+                patchName: 'PowerShell Core Security Update',
+                severity: 'Important',
+                computerName: 'WIN-WKS-05',
+                from: '2024-11-14',
+                to: '2024-11-18',
+                releaseDate: '2024-11-11',
+                owner: 'Helpdesk Team',
+                status: 'Remediated'
+            },
+            {
+                patchName: 'Windows Defender Antimalware Platform Update',
+                severity: 'Critical',
+                computerName: 'WIN-LAP-09',
+                from: '2024-11-20',
+                to: '2024-12-05',
+                releaseDate: '2024-11-18',
+                owner: 'Security Ops',
+                status: 'Outstanding'
+            }
+        ]
+    },
+    'Linux': {
+        totalPatches: 145,
+        remediatedPatches: 130,
+        details: [
+            {
+                patchName: 'Kernel Security Update 5.15.0-88',
+                severity: 'Critical',
+                computerName: 'LNX-WEB-01',
+                from: '2024-11-08',
+                to: '2024-11-12',
+                releaseDate: '2024-11-05',
+                owner: 'Linux Ops',
+                status: 'Remediated'
+            },
+            {
+                patchName: 'OpenSSL Security Patch 3.0.11',
+                severity: 'Important',
+                computerName: 'LNX-APP-02',
+                from: '2024-11-09',
+                to: '2024-11-14',
+                releaseDate: '2024-11-06',
+                owner: 'DevOps Team',
+                status: 'Remediated'
+            },
+            {
+                patchName: 'Sudo Privilege Escalation Fix',
+                severity: 'Critical',
+                computerName: 'LNX-DB-03',
+                from: '2024-11-15',
+                to: '2024-12-01',
+                releaseDate: '2024-11-12',
+                owner: 'Linux Ops',
+                status: 'Outstanding'
+            }
+        ]
+    },
+    'MacOS': {
+        totalPatches: 80,
+        remediatedPatches: 72,
+        details: [
+            {
+                patchName: 'macOS Sonoma 14.1.1 Update',
+                severity: 'Critical',
+                computerName: 'MAC-DES-01',
+                from: '2024-11-10',
+                to: '2024-11-13',
+                releaseDate: '2024-11-08',
+                owner: 'Mac Support',
+                status: 'Remediated'
+            },
+            {
+                patchName: 'Safari Security Update 17.1',
+                severity: 'Important',
+                computerName: 'MAC-LAP-04',
+                from: '2024-11-11',
+                to: '2024-11-15',
+                releaseDate: '2024-11-09',
+                owner: 'Mac Support',
+                status: 'Remediated'
+            },
+            {
+                patchName: 'Xcode Command Line Tools Update',
+                severity: 'Important',
+                computerName: 'MAC-DEV-02',
+                from: '2024-11-18',
+                to: '2024-12-02',
+                releaseDate: '2024-11-15',
+                owner: 'Dev Team',
+                status: 'Outstanding'
+            }
+        ]
+    },
+    'AIX': {
+        totalPatches: 45,
+        remediatedPatches: 40,
+        details: [
+            {
+                patchName: 'AIX 7.3 TL1 SP2 Security Fix',
+                severity: 'Critical',
+                computerName: 'AIX-ERP-01',
+                from: '2024-11-05',
+                to: '2024-11-09',
+                releaseDate: '2024-11-02',
+                owner: 'Unix Admins',
+                status: 'Remediated'
+            },
+            {
+                patchName: 'OpenSSH for AIX Update',
+                severity: 'Important',
+                computerName: 'AIX-DB-02',
+                from: '2024-11-07',
+                to: '2024-11-25',
+                releaseDate: '2024-11-04',
+                owner: 'Security Ops',
+                status: 'Outstanding'
+            }
+        ]
+    },
+    'Unix': {
+        totalPatches: 30,
+        remediatedPatches: 28,
+        details: [
+            {
+                patchName: 'Solaris 11.4 SRU 63 Security Patch',
+                severity: 'Critical',
+                computerName: 'UNIX-LEG-01',
+                from: '2024-11-12',
+                to: '2024-11-16',
+                releaseDate: '2024-11-09',
+                owner: 'Legacy Ops',
+                status: 'Remediated'
+            },
+            {
+                patchName: 'Bash Shell Shock Mitigation',
+                severity: 'Important',
+                computerName: 'UNIX-BATCH-01',
+                from: '2024-11-14',
+                to: '2024-11-19',
+                releaseDate: '2024-11-10',
+                owner: 'Unix Admins',
+                status: 'Remediated'
+            }
+        ]
+    },
+    'RHEL': {
+        totalPatches: 130,
+        remediatedPatches: 115,
+        details: [
+            {
+                patchName: 'RHSA-2024:1234 glibc Security Update',
+                severity: 'Critical',
+                computerName: 'RHEL-APP-01',
+                from: '2024-11-09',
+                to: '2024-11-13',
+                releaseDate: '2024-11-06',
+                owner: 'Linux Ops',
+                status: 'Remediated'
+            },
+            {
+                patchName: 'Systemd Security Fix CVE-2024-5678',
+                severity: 'Important',
+                computerName: 'RHEL-WEB-02',
+                from: '2024-11-11',
+                to: '2024-11-28',
+                releaseDate: '2024-11-08',
+                owner: 'DevOps Team',
+                status: 'Outstanding'
+            },
+            {
+                patchName: 'Firewalld Configuration Patch',
+                severity: 'Important',
+                computerName: 'RHEL-DB-01',
+                from: '2024-11-10',
+                to: '2024-11-15',
+                releaseDate: '2024-11-07',
+                owner: 'Security Ops',
+                status: 'Remediated'
+            }
+        ]
+    },
+    'Ubuntu': {
+        totalPatches: 160,
+        remediatedPatches: 145,
+        details: [
+            {
+                patchName: 'USN-6450-1: Python Vulnerability',
+                severity: 'High',
+                computerName: 'UBU-WEB-01',
+                from: '2024-11-08',
+                to: '2024-11-12',
+                releaseDate: '2024-11-05',
+                owner: 'DevOps Team',
+                status: 'Remediated'
+            },
+            {
+                patchName: 'Ubuntu 22.04 LTS Kernel Update',
+                severity: 'Critical',
+                computerName: 'UBU-APP-05',
+                from: '2024-11-15',
+                to: '2024-11-19',
+                releaseDate: '2024-11-12',
+                owner: 'Linux Ops',
+                status: 'Remediated'
+            },
+            {
+                patchName: 'Snapd Privilege Escalation Fix',
+                severity: 'Important',
+                computerName: 'UBU-DEV-01',
+                from: '2024-11-20',
+                to: '2024-12-05',
+                releaseDate: '2024-11-18',
+                owner: 'DevOps Team',
+                status: 'Outstanding'
+            }
+        ]
+    },
+    'CentOS': {
+        totalPatches: 90,
+        remediatedPatches: 82,
+        details: [
+            {
+                patchName: 'CentOS 7 EOL Security Patch',
+                severity: 'Critical',
+                computerName: 'CNT-SRV-01',
+                from: '2024-11-05',
+                to: '2024-11-10',
+                releaseDate: '2024-11-02',
+                owner: 'Legacy Ops',
+                status: 'Remediated'
+            },
+            {
+                patchName: 'Yum Package Manager Update',
+                severity: 'Important',
+                computerName: 'CNT-WEB-02',
+                from: '2024-11-07',
+                to: '2024-11-12',
+                releaseDate: '2024-11-04',
+                owner: 'Linux Ops',
+                status: 'Remediated'
+            },
+            {
+                patchName: 'NTP Time Synchronization Fix',
+                severity: 'Important',
+                computerName: 'CNT-DB-01',
+                from: '2024-11-15',
+                to: '2024-12-01',
+                releaseDate: '2024-11-12',
+                owner: 'System Admins',
+                status: 'Outstanding'
+            }
+        ]
+    }
+};
 
 // Pagination State
 let currentPage = 1;
@@ -1328,8 +1601,8 @@ function showEnvDetails(environment, dateFrom = null, dateTo = null) {
 
     // Populate table
     filteredDetails.forEach(item => {
-        const statusClass = item.status === 'Remediated' ? 'env-status-remediated' : 
-                           item.status === 'Pending' ? 'env-status-pending' : 'env-status-failed';
+        const statusClass = item.status === 'Remediated' ? 'env-status-remediated' :
+            item.status === 'Pending' ? 'env-status-pending' : 'env-status-failed';
         const severityClass = `env-severity-${item.severity.toLowerCase()}`;
 
         const row = document.createElement('tr');
@@ -1412,7 +1685,7 @@ function applyEnvFilter() {
     const selectedEnv = document.getElementById('envSelectedEnv');
     const tableBody = document.getElementById('envTableBody');
 
-    tableBody.innerHTML = "";          
+    tableBody.innerHTML = "";
     emptyState.style.display = 'block';
     selectedEnv.style.display = 'none';
     detailsTable.classList.remove('visible');
@@ -1447,11 +1720,16 @@ function loadEnvChart() {
             animation: true,
 
             scales: {
+                scales: {
+                x: {
+                    grid: { display: false }
+                },
                 y: {
                     beginAtZero: true,
                     max: 100,
-                    ticks: { stepSize: 20 }
+                    grid: { color: '#e1e8ed' }
                 }
+            }
             },
 
             onClick: (event, activeElements) => {
@@ -1480,6 +1758,264 @@ function loadEnvChart() {
     document.getElementById('envSelectedEnv').style.display = 'none';
     document.getElementById('envTableBody').innerHTML = "";
 }
+
+
+/** ======================
+
+compliance by os tab 
+
+* ====================== */
+
+
+
+
+
+// Global chart reference
+let osComplianceChart = null;
+
+// List of OS labels (you can modify as needed)
+const osList = [
+    "Windows",
+    "Linux",
+    "MacOS",
+    "AIX",
+    "Unix",
+    "RHEL",
+    "Ubuntu",
+    "CentOS"
+];
+
+// Initialize OS Chart
+function initOSComplianceChart() {
+    const ctx = document.getElementById('osComplianceChart');
+    if (!ctx) return;
+
+    const chartContext = ctx.getContext('2d');
+
+    const emptyData = osList.map(() => 0);
+
+    const colors = ['#3498db', '#2ecc71', '#f39c12', '#e74c3c', '#9b59b6', '#1abc9c', '#8e44ad', '#27ae60'];
+
+    osComplianceChart = new Chart(chartContext, {
+        type: 'bar',
+        data: {
+            labels: osList,
+            datasets: [{
+                label: 'Compliance %',
+                data: emptyData,
+                backgroundColor: colors,
+                borderRadius: 8,
+                barPercentage: 0.7,
+                categoryPercentage: 0.8
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+
+            onClick: (event, activeElements) => {
+                if (activeElements.length === 0) return;
+
+                const index = activeElements[0].index;
+                const osName = osList[index];
+
+                const fromRaw = document.getElementById('osDateFrom').value;
+                const toRaw = document.getElementById('osDateTo').value;
+
+                const dateFrom = formatToISO(fromRaw);
+                const dateTo = formatToISO(toRaw);
+
+                showOSDetails(osName, dateFrom, dateTo);
+            },
+
+            plugins: {
+                legend: { display: false }
+            },
+
+            scales: {
+                x: {
+                    grid: { display: false }
+                },
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    grid: { color: '#e1e8ed' }
+                }
+            }
+        }
+    });
+
+    // Hide chart by default
+    document.getElementById("osChartContainer").style.display = "none";
+}
+
+
+
+// OS DETAILS TABLE
+function showOSDetails(osName, dateFrom = null, dateTo = null) {
+
+    const data = osComplianceData[osName];
+    if (!data) return;
+
+    const tableBody = document.getElementById('osTableBody');
+    const emptyState = document.getElementById('osEmptyState');
+    const table = document.getElementById('osDetailsTable');
+    const selectedOS = document.getElementById('osSelectedOS');
+
+    tableBody.innerHTML = "";
+
+    const filtered = data.details.filter(item => {
+        if (!dateFrom || !dateTo) return true;
+        return new Date(item.from) >= new Date(dateFrom) &&
+            new Date(item.to) <= new Date(dateTo);
+    });
+
+    filtered.forEach(item => {
+        const row = document.createElement("tr");
+
+        const statusClass =
+            item.status === "Remediated"
+                ? "env-status-remediated"
+                : item.status === "Pending"
+                    ? "env-status-pending"
+                    : "env-status-failed";
+
+        const severityClass = `env-severity-${item.severity.toLowerCase()}`;
+
+        row.innerHTML = `
+            <td>${item.patchName}</td>
+            <td class="${severityClass}">${item.severity}</td>
+            <td>${item.computerName}</td>
+            <td>${item.from}</td>
+            <td>${item.to}</td>
+            <td>${item.releaseDate}</td>
+            <td>${item.owner}</td>
+            <td><span class="env-status-badge ${statusClass}">${item.status}</span></td>
+        `;
+
+        tableBody.appendChild(row);
+    });
+
+    if (filtered.length === 0) {
+        emptyState.style.display = "block";
+        table.classList.remove("visible");
+        selectedOS.style.display = "none";
+    } else {
+        emptyState.style.display = "none";
+        table.classList.add("visible");
+        selectedOS.style.display = "block";
+        selectedOS.textContent = `${osName} - ${filtered.filter(x => x.status === "Remediated").length}/${filtered.length} patches remediated`;
+        table.scrollIntoView({ behavior: "smooth" });
+    }
+}
+
+
+
+// APPLY FILTER FOR OS
+function applyOSFilter() {
+
+    document.getElementById("osChartContainer").style.display = "block";
+
+    const fromRaw = document.getElementById('osDateFrom').value;
+    const toRaw = document.getElementById('osDateTo').value;
+
+    if (!fromRaw || !toRaw) {
+        alert("Please select both FROM and TO dates");
+        return;
+    }
+
+    const dateFrom = formatToISO(fromRaw);
+    const dateTo = formatToISO(toRaw);
+
+    if (new Date(dateFrom) > new Date(dateTo)) {
+        alert("Start date cannot be after end date");
+        return;
+    }
+
+    const updatedPercentages = osList.map(os => {
+        const osObj = osComplianceData[os];
+        if (!osObj) return 0;
+
+        const filtered = osObj.details.filter(item => {
+            return new Date(item.from) >= new Date(dateFrom) &&
+                new Date(item.to) <= new Date(dateTo);
+        });
+
+        const total = filtered.length;
+        const rem = filtered.filter(x => x.status === "Remediated").length;
+
+        return total === 0 ? 0 : ((rem / total) * 100).toFixed(1);
+    });
+
+    osComplianceChart.data.datasets[0].data = updatedPercentages;
+    osComplianceChart.update();
+
+    // reset table
+    document.getElementById("osEmptyState").style.display = "block";
+    document.getElementById("osDetailsTable").classList.remove("visible");
+    document.getElementById("osSelectedOS").style.display = "none";
+    document.getElementById("osTableBody").innerHTML = "";
+}
+
+
+
+// LOAD BLANK OS CHART ON TAB SWITCH
+function loadOSChart() {
+
+    const ctx = document.getElementById("osComplianceChart").getContext("2d");
+
+    if (osComplianceChart) osComplianceChart.destroy();
+
+    osComplianceChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: osList,
+            datasets: [{
+                label: "Compliance %",
+                data: [],
+                backgroundColor: "#3e95cd",
+                borderRadius: 6,
+                barPercentage: 0.5,
+                categoryPercentage: 0.5
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: true,
+            plugins: {
+                legend: {
+                    display: false     // Hides the legend completely
+                }
+            },
+            onClick(event, activeElements) {
+                if (osComplianceChart.data.datasets[0].data.length === 0) return;
+                if (activeElements.length === 0) return;
+
+                const index = activeElements[0].index;
+                const osName = osComplianceChart.data.labels[index];
+
+                const from = document.getElementById("osDateFrom").value;
+                const to = document.getElementById("osDateTo").value;
+
+                if (!from || !to) return;
+
+                // FIX: Convert to ISO before filtering
+                const dateFrom = formatToISO(from);
+                const dateTo = formatToISO(to);
+
+                showOSDetails(osName, dateFrom, dateTo);
+            }
+
+        }
+    });
+
+    document.getElementById("osEmptyState").style.display = "block";
+    document.getElementById("osSelectedOS").style.display = "none";
+    document.getElementById("osDetailsTable").classList.remove("visible");
+    document.getElementById("osTableBody").innerHTML = "";
+}
+
 
 
 /* -----------------------------
@@ -1746,6 +2282,21 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+
+/** comp by os tab eventlistener */
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Initialize chart
+    initOSComplianceChart();
+
+    // Apply button click
+    const applyBtn = document.getElementById('osApplyBtn');
+    if (applyBtn) {
+        applyBtn.addEventListener('click', applyOSFilter);
+    }
+});
+
+
 // ----------------------
 // KPI → Trigger Filter
 // ----------------------
@@ -1782,64 +2333,64 @@ resetCompDashboard();
 
 
 
-let envChartInstance = null;
+// let envChartInstance = null;
 
-function renderEnvComplianceChart() {
-    const ctx = document.getElementById("envComplianceChart");
+// function renderEnvComplianceChart() {
+//     const ctx = document.getElementById("envComplianceChart");
 
-    if (envChartInstance) {
-        envChartInstance.destroy();
-    }
+//     if (envChartInstance) {
+//         envChartInstance.destroy();
+//     }
 
-    const environments = ["Production", "UAT", "Dev", "DR", "Cloud", "InfraOps"];
-    const complianceValues = [98, 95, 92, 93, 96, 94];
+//     const environments = ["Production", "UAT", "Dev", "DR", "Cloud", "InfraOps"];
+//     const complianceValues = [98, 95, 92, 93, 96, 94];
 
-    envChartInstance = new Chart(ctx, {
-        type: "bar",
-        data: {
-            labels: environments,
-            datasets: [{
-                label: "Compliance (%)",
-                data: complianceValues,
-                backgroundColor: [
-                    "rgba(75, 192, 192, 0.6)",
-                    "rgba(54, 162, 235, 0.6)",
-                    "rgba(255, 159, 64, 0.6)",
-                    "rgba(153, 102, 255, 0.6)",
-                    "rgba(255, 206, 86, 0.6)",
-                    "rgba(201, 203, 207, 0.6)"
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    min: 80,
-                    max: 100
-                }
-            }
-        }
-    });
-}
+//     envChartInstance = new Chart(ctx, {
+//         type: "bar",
+//         data: {
+//             labels: environments,
+//             datasets: [{
+//                 label: "Compliance (%)",
+//                 data: complianceValues,
+//                 backgroundColor: [
+//                     "rgba(75, 192, 192, 0.6)",
+//                     "rgba(54, 162, 235, 0.6)",
+//                     "rgba(255, 159, 64, 0.6)",
+//                     "rgba(153, 102, 255, 0.6)",
+//                     "rgba(255, 206, 86, 0.6)",
+//                     "rgba(201, 203, 207, 0.6)"
+//                 ],
+//                 borderWidth: 1
+//             }]
+//         },
+//         options: {
+//             responsive: true,
+//             scales: {
+//                 y: {
+//                     min: 80,
+//                     max: 100
+//                 }
+//             }
+//         }
+//     });
+// }
 
 
-// --- 2) Compliance by OS Chart (Pie) ---
-function loadOSChart() {
-    const ctx = document.getElementById('osComplianceChart').getContext('2d');
+// // --- 2) Compliance by OS Chart (Pie) ---
+// function loadOSChart() {
+//     const ctx = document.getElementById('osComplianceChart').getContext('2d');
 
-    new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: ["Windows 2012", "Windows 2016", "Windows 2019", "Linux (RHEL/CentOS/Amazon)"],
-            datasets: [{
-                data: [50, 70, 85, 60], // Placeholder values
-                borderWidth: 1
-            }]
-        }
-    });
-}
+//     new Chart(ctx, {
+//         type: 'pie',
+//         data: {
+//             labels: ["Windows 2012", "Windows 2016", "Windows 2019", "Linux (RHEL/CentOS/Amazon)"],
+//             datasets: [{
+//                 data: [50, 70, 85, 60], // Placeholder values
+//                 borderWidth: 1
+//             }]
+//         }
+//     });
+// }
 
 // Load charts when tabs become active
 document.querySelector('[data-tab="envTab"]').addEventListener('click', function () {

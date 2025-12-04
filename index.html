@@ -430,13 +430,70 @@
         <!-- ============================================================ -->
         <!-- TAB 4: COMPLIANCE BY OPERATING SYSTEM -->
         <!-- ============================================================ -->
+        <!-- ============================================================ -->
+        <!-- TAB 4: COMPLIANCE BY OS -->
+        <!-- ============================================================ -->
         <div id="osTab" class="tab-content">
-            <h2>Compliance by Operating System</h2>
 
-            <div class="chart-container">
-                <canvas id="osComplianceChart"></canvas>
+            <div class="os-filter-section">
+
+                <div class="os-filter-group">
+                    <label for="osDateFrom">From</label>
+                    <div class="custom-input custom-date-wrapper">
+                        <input type="text" id="osDateFrom" class="date-input" placeholder="dd-mm-yyyy" readonly>
+                        <i class="fa-solid fa-calendar-days calendar-icon"></i>
+                    </div>
+                </div>
+
+                <div class="os-filter-group">
+                    <label for="osDateTo">To</label>
+                    <div class="custom-input custom-date-wrapper">
+                        <input type="text" id="osDateTo" class="date-input" placeholder="dd-mm-yyyy" readonly>
+                        <i class="fa-solid fa-calendar-days calendar-icon"></i>
+                    </div>
+                </div>
+
+                <button class="os-apply-btn" id="osApplyBtn">Apply</button>
             </div>
+
+            <div class="os-chart-wrapper">
+                <div class="os-chart-title">Compliance Percentage by Operating System</div>
+
+                <div class="os-chart-container" id="osChartContainer">
+                    <canvas id="osComplianceChart"></canvas>
+                </div>
+            </div>
+
+            <div class="os-table-wrapper">
+                <div class="os-table-header">
+                    <div class="os-table-title">OS Compliance Details</div>
+                    <div class="os-selected-os" id="osSelectedOS" style="display: none;"></div>
+                </div>
+
+                <div class="os-empty-state" id="osEmptyState">
+                    <p>No OS selected</p>
+                    <small>Click on any bar in the chart above to view detailed compliance data</small>
+                </div>
+
+                <table id="osDetailsTable" class="os-details-table">
+                    <thead>
+                        <tr>
+                            <th>Patch Name</th>
+                            <th>Severity</th>
+                            <th>Computer Name</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Release Date</th>
+                            <th>Responsibility/Owner</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="osTableBody"></tbody>
+                </table>
+            </div>
+
         </div>
+
 
         <div id="datePickerPopup"></div>
 
